@@ -1,0 +1,101 @@
+/*左边内容部分*/
+.container-left{
+    float: left;
+    width: 720px;
+    overflow: hidden;
+}
+.img-title{
+    margin: 13px 0;
+}
+.image-switch{
+    height: 215px;
+    overflow: hidden;
+}
+.image-switch .image-switch-frame{
+    float: left;
+    width: 270px;
+    height: 215px;
+    background-image: url("../images/switch4.jpg");
+    background-size: 100% 100%;
+}
+.image-switch .pre-image{
+    float: left;
+    margin-left: 5px;
+}
+.image-switch .pre-image ul li{
+    width: 440px;
+    height: 50px;
+    margin-bottom: 5px;
+    background-color: #fcfcfc;
+}
+.image-switch .pre-image ul li:hover{
+    background-color: #f1f1f1;
+}
+.image-switch .pre-image ul li a .img-content:hover {
+    color: #2d8ec8;
+}
+.image-switch .pre-image ul li a img{
+    float: left;
+    width: 63px;
+    height: 50px;
+}
+.image-switch .pre-image ul li a .img-content{
+    float: left;
+    font-size: 12px;
+    margin-left: 5px;
+    color: #123456;
+}
+.image-switch .pre-image ul li a .img-content .img-content-title{
+    line-height: 20px;
+}
+.image-switch .pre-image ul li a .img-content .img-content-contents{
+    width: 338px;
+    line-height: 30px;
+}
+.list-title{
+    width: 100%;
+    font-size: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 4px 5px #f9f9f9;
+}
+.list-title a{
+    color: #3171b8;
+}
+.list-article{
+    width: 100%;
+    overflow: hidden;
+}
+.list-article ul{
+    width: 758px;
+}
+.list-article ul li{
+    float: left;
+    width: 167px;
+    margin-right: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #999;
+    padding-bottom: 20px;
+}
+.list-article ul li a img{
+    width: 167px;
+    height: 130px;
+}
+.list-article ul li a .title{
+    color: black;
+    line-height: 28px;
+}
+.list-article ul li .content{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-size: 12px;
+    color: #999999;
+    line-height: 20px;
+    text-indent: 2em;
+}
+
+
