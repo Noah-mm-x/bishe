@@ -74,7 +74,7 @@
     width: 167px;
     margin-right: 18px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #e4e4e4;
     padding-bottom: 20px;
 }
 .list-article ul li a img{
@@ -96,6 +96,104 @@
     color: #999999;
     line-height: 20px;
     text-indent: 2em;
+}
+.list-group{
+    margin-top: 25px;
+    overflow: hidden;
+}
+.list-group ul{
+    width: 435px;
+    height: 346px;
+    float: left;
+    overflow: hidden;
+    border-right:2px solid #e4e4e4;
+}
+.list-group ul li{
+    width: 410px;
+    height: 50px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e4e4e4;
+}
+.list-group ul li a img{
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+.list-group ul li .group-content{
+    float: left;
+    margin-left: 12px;
+}
+.list-group ul li .group-content a .title{
+    width: 320px;
+    font-size: 12px;
+    color: #3171b8;
+    line-height: 14px;
+}
+.list-group ul li .group-content .content{
+    width: 320px;
+    font-size: 12px;
+    color: #666;
+    line-height: 43px;
+}
+.list-group .img-group{
+    float: right;
+    width: 276px;
+    height: 348px;
+}
+.list-book{
+    margin-top: 20px;
+    overflow: hidden;
+}
+.list-book .left{
+    float: left;
+}
+.list-book .title{
+    width: 310px;
+    height: 87px;
+    text-align: center;
+    margin: 0 auto;
+    background: url("../images/bookBg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.list-book .title p{
+    font-size: 48px;
+    color: #123456;
+    line-height: 85px;
+}
+.list-book ul{
+    width: 435px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.list-book ul li{
+    float: left;
+    text-align: center;
+    line-height: 22px;
+    background-color: #d9f2fd;
+    border-radius: 12px;
+    margin-right: 12px;
+    margin-bottom: 14px;
+    padding: 0 5px;
+}
+.list-book ul li:hover{
+    background-color: #3171b8;
+}
+.list-book ul li a{
+    font-size: 12px;
+    color: #3171b8;
+}
+.list-book ul li:hover a{
+    color: #ffffff;
+}
+.list-book .right{
+    float: right;
+}
+.list-book .right img{
+    width: 276px;
+    height: 348px;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
 }
 
 
