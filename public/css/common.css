@@ -195,6 +195,7 @@ table {
 .reduce-opacity:hover {
     opacity: .8;
     filter: alpha(opacity:.8);
+    /*background-color: #ffffff;*/
 }
 
 /*顶部栏*/
@@ -242,5 +243,6 @@ header ul li a {
 .container {
     margin: 0 140px;
     margin-top: 39px;
+    overflow: hidden;
 }
 

@@ -78,6 +78,7 @@
 
 .list-article {
     width: 100%;
+    margin-top: 20px;
     overflow: hidden;
 }
 
@@ -365,3 +366,104 @@
     margin-right: 6px;
 }
 
+.comments {
+
+}
+
+.comments .avatar {
+    float: left;
+    width: 50px;
+}
+
+.comments > ul {
+    margin-top: 20px;
+}
+
+.comments ul li {
+    margin: 10px 0;
+    border-bottom: 1px dashed #e6e6e6;
+    padding-bottom: 10px;
+}
+
+.comments .avatar > img {
+    width: 50px;
+    height: 50px;
+}
+
+.comments .details {
+    float: left;
+    margin-left: 10px;
+    width: 209px;
+    font-size: 12px;
+    color: #123456;
+}
+
+.comments .details .user-comment {
+    color: #444444;
+}
+
+.comments .details .comment-time {
+    text-align: right;
+    color: #999999;
+}
+
+.film ul {
+    width: 298px;
+}
+
+.film ul li {
+    float: left;
+    margin-top: 25px;
+    margin-right: 13px;
+}
+
+.film ul li a img {
+    width: 83px;
+    height: 117px;
+    border: none;
+}
+
+.film ul li a p {
+    width: 82px;
+    font-size: 12px;
+    color: #123456;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.film ul li a p:hover {
+    color: #2e8fc9;
+}
+
+.music li{
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px dashed #e6e6e6;
+    padding-bottom: 14px;
+    margin-top: 9px;
+}
+
+.music li > img {
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+.music .music-info a {
+    float: left;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #123456;
+}
+
+.music .music-info a :hover {
+    color: #2e8fc9;
+}
+
+.music .music-info a .singer-name{
+    margin-top: -1px;
+}
+
+.music .music-info a .music-name{
+    margin-top: 4px;
+}
