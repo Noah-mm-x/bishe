@@ -1,75 +1,91 @@
 /*左边内容部分*/
-.container-left{
+.container-left {
     float: left;
     width: 720px;
     overflow: hidden;
 }
-.img-title{
+
+.img-title {
     margin: 13px 0;
 }
-.image-switch{
+
+.image-switch {
     height: 215px;
     overflow: hidden;
 }
-.image-switch .image-switch-frame{
+
+.image-switch .image-switch-frame {
     float: left;
     width: 270px;
     height: 215px;
     background-image: url("../images/switch4.jpg");
     background-size: 100% 100%;
 }
-.image-switch .pre-image{
+
+.image-switch .pre-image {
     float: left;
     margin-left: 5px;
 }
-.image-switch .pre-image ul li{
+
+.image-switch .pre-image ul li {
     width: 440px;
     height: 50px;
     margin-bottom: 5px;
     background-color: #fcfcfc;
 }
-.image-switch .pre-image ul li:hover{
+
+.image-switch .pre-image ul li:hover {
     background-color: #f1f1f1;
 }
+
 .image-switch .pre-image ul li a .img-content:hover {
     color: #2d8ec8;
 }
-.image-switch .pre-image ul li a img{
+
+.image-switch .pre-image ul li a img {
     float: left;
     width: 63px;
     height: 50px;
 }
-.image-switch .pre-image ul li a .img-content{
+
+.image-switch .pre-image ul li a .img-content {
     float: left;
     font-size: 12px;
     margin-left: 5px;
     color: #123456;
 }
-.image-switch .pre-image ul li a .img-content .img-content-title{
+
+.image-switch .pre-image ul li a .img-content .img-content-title {
     line-height: 20px;
 }
-.image-switch .pre-image ul li a .img-content .img-content-contents{
+
+.image-switch .pre-image ul li a .img-content .img-content-contents {
     width: 338px;
     line-height: 30px;
 }
-.list-title{
+
+.list-title {
     width: 100%;
     font-size: 12px;
     padding: 15px 0;
     border-bottom: 1px solid #e6e6e6;
     box-shadow: 0 4px 5px #f9f9f9;
 }
-.list-title a{
+
+.list-title a {
     color: #3171b8;
 }
-.list-article{
+
+.list-article {
     width: 100%;
     overflow: hidden;
 }
-.list-article ul{
+
+.list-article ul {
     width: 758px;
 }
-.list-article ul li{
+
+.list-article ul li {
     float: left;
     width: 167px;
     margin-right: 18px;
@@ -77,15 +93,18 @@
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 20px;
 }
-.list-article ul li a img{
+
+.list-article ul li a img {
     width: 167px;
     height: 130px;
 }
-.list-article ul li a .title{
+
+.list-article ul li a .title {
     color: black;
     line-height: 28px;
 }
-.list-article ul li .content{
+
+.list-article ul li .content {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -97,58 +116,69 @@
     line-height: 20px;
     text-indent: 2em;
 }
-.list-group{
+
+.list-group {
     margin-top: 25px;
     overflow: hidden;
 }
-.list-group ul{
+
+.list-group ul {
     width: 435px;
     height: 346px;
     float: left;
     overflow: hidden;
-    border-right:2px solid #e4e4e4;
+    border-right: 2px solid #e4e4e4;
 }
-.list-group ul li{
+
+.list-group ul li {
     width: 410px;
     height: 50px;
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px dashed #e4e4e4;
 }
-.list-group ul li a img{
+
+.list-group ul li a img {
     float: left;
     width: 50px;
     height: 50px;
 }
-.list-group ul li .group-content{
+
+.list-group ul li .group-content {
     float: left;
     margin-left: 12px;
 }
-.list-group ul li .group-content a .title{
+
+.list-group ul li .group-content a .title {
     width: 320px;
     font-size: 12px;
     color: #3171b8;
     line-height: 14px;
 }
-.list-group ul li .group-content .content{
+
+.list-group ul li .group-content .content {
     width: 320px;
     font-size: 12px;
     color: #666;
     line-height: 43px;
 }
-.list-group .img-group{
+
+.list-group .img-group {
     float: right;
     width: 276px;
     height: 348px;
 }
-.list-book{
+
+.list-book {
     margin-top: 20px;
     overflow: hidden;
 }
-.list-book .left{
+
+.list-book .left {
     float: left;
 }
-.list-book .title{
+
+.list-book .title {
     width: 310px;
     height: 87px;
     text-align: center;
@@ -156,17 +186,20 @@
     background: url("../images/bookBg.png") no-repeat;
     background-size: 100% 100%;
 }
-.list-book .title p{
+
+.list-book .title p {
     font-size: 48px;
     color: #123456;
     line-height: 85px;
 }
-.list-book ul{
+
+.list-book ul {
     width: 435px;
     margin-top: 20px;
     overflow: hidden;
 }
-.list-book ul li{
+
+.list-book ul li {
     float: left;
     text-align: center;
     line-height: 22px;
@@ -176,24 +209,159 @@
     margin-bottom: 14px;
     padding: 0 5px;
 }
-.list-book ul li:hover{
+
+.list-book ul li:hover {
     background-color: #3171b8;
 }
-.list-book ul li a{
+
+.list-book ul li a {
     font-size: 12px;
     color: #3171b8;
 }
-.list-book ul li:hover a{
+
+.list-book ul li:hover a {
     color: #ffffff;
 }
-.list-book .right{
+
+.list-book .right {
     float: right;
 }
-.list-book .right img{
+
+.list-book .right img {
     width: 276px;
     height: 348px;
     border: 1px solid #e4e4e4;
     border-radius: 5px;
 }
 
+/*右边部分*/
+.container-right {
+    float: left;
+    margin-left: 44px;
+    width: 275px;
+    overflow: hidden;
+    background-color: red;
+    height: 1726px;
+}
+
+.join-us-title {
+    width: 100%;
+    height: 22px;
+    margin-top: 20px;
+}
+
+.join-us-title > a {
+    float: right;
+    padding: 4px 8px;
+    background-color: #3171b8;
+    font-size: 12px;
+    color: #ffffff;
+    border: 1px solid #08294a;
+    border-radius: 3px;
+}
+
+.signIn-box {
+    width: 100%;
+    height: 214px;
+    background-color: #fcfcfc;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.signIn-box > h4 {
+    color: #444444;
+    margin-top: 18px;
+    margin-left: 13px;
+}
+
+.signIn-box > ul {
+    margin-top: 22px;
+    margin-left: 13px;
+}
+
+.signIn-box > ul li {
+    margin-bottom: 6px;
+    width: 100%;
+    height: 26px;
+}
+
+.signIn-box > ul li span {
+    float: left;
+    font-size: 12px;
+    color: #444444;
+    line-height: 26px;
+}
+
+.signIn-box > ul li input {
+    float: right;
+    width: 192px;
+    height: 13px;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.signIn-box .remember-and-login {
+    margin-top: 16px;
+}
+
+.signIn-box .remember-and-login .remember {
+    line-height: 11px;
+}
+
+.signIn-box .remember-and-login .remember > i {
+    display: block;
+    float: left;
+    margin-left: 70px;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    background-color: #e6e6e6;
+}
+
+.signIn-box .remember-and-login .remember > i.checked {
+    background: #6cc5c9 url("../images/v.png") no-repeat;
+    background-position: center center;
+}
+
+.signIn-box .remember-and-login .remember > span {
+    font-size: 12px;
+    color: #444444;
+    margin-left: 6px;
+}
+
+.signIn-box .remember-and-login .remember > a {
+    display: block;
+    float: right;
+    width: 40px;
+    height: 18px;
+    font-size: 12px;
+    color: #123456;
+    text-align: center;
+    line-height: 18px;
+    background-color: #e4f2ff;
+    border: 1px solid #aacae6;
+    border-radius: 1px;
+    margin-top: -6px;
+}
+
+.signIn-box .other-mode-login {
+    margin-top: 30px;
+    line-height: 2;
+}
+
+.signIn-box .other-mode-login span {
+    float: left;
+    font-size: 12px;
+    color: #444444;
+}
+
+.signIn-box .other-mode-login i:first-child {
+    margin-left: 12px;
+}
+
+.signIn-box .other-mode-login i {
+    display: block;
+    float: left;
+    margin-right: 6px;
+}
 

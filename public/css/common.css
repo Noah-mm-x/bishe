@@ -1,27 +1,174 @@
 /*界面css初始化*/
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
-body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
-h1, h2, h3, h4, h5, h6{ font-size:100%; }
-address, cite, dfn, em, var { font-style:normal; }
-code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
-small{ font-size:12px; }
-ul, ol { list-style:none; }
-a { text-decoration:none; }
-a:hover { text-decoration:none;}
-a:focus {outline: none;}
-sup { vertical-align:text-top; }
-sub{ vertical-align:text-bottom; }
-legend { color:#000; }
-fieldset, img { border:0; }
-button, input, select, textarea { font-size:100%; }
-table { border-collapse:collapse; border-spacing:0; }
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+body, button, input, select, textarea {
+    font: 12px/1.5 tahoma, arial, \5b8b\4f53;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+
+address, cite, dfn, em, var {
+    font-style: normal;
+}
+
+code, kbd, pre, samp {
+    font-family: couriernew, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset, img {
+    border: 0;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*分享*/
+.fenxiang-icon {
+    display: block;
+    width: 23px;
+    height: 23px;
+    background-image: url("../images/fenxiang.png");
+    background-repeat: no-repeat;
+}
+
+.fenxiang-xinlang {
+    background-position: 0 0;
+}
+
+.fenxiang-tenxunweibo {
+    background-position: -23px 0;
+}
+
+.fenxiang-renren {
+    background-position: -46px 0;
+}
+
+.fenxiang-dian {
+    background-position: -69px 0;
+}
+
+.fenxiang-hongxin {
+    background-position: -92px 0;
+}
+
+.fenxiang-douban {
+    background-position: -115px 0;
+}
+
+.fenxiang-duitian {
+    background-position: -138px 0;
+}
+
+.fenxiang-xingxing {
+    background-position: -161px 0;
+}
+
+.fenxiang-baidu {
+    background-position: -184px 0;
+}
+
+.fenxiang-qqkongjian {
+    background-position: -207px 0;
+}
+
+.fenxiang-qq {
+    background-position: -230px 0;
+}
+
+.fenxiang-xinlang:hover {
+    background-position: 0 -23px;
+}
+
+.fenxiang-tenxunweibo:hover {
+    background-position: -23px -23px;
+}
+
+.fenxiang-renren:hover {
+    background-position: -46px -23px;
+}
+
+.fenxiang-dian:hover {
+    background-position: -69px -23px;
+}
+
+.fenxiang-hongxin:hover {
+    background-position: -92px -23px;
+}
+
+.fenxiang-douban:hover {
+    background-position: -115px -23px;
+}
+
+.fenxiang-duitian:hover {
+    background-position: -138px -23px;
+}
+
+.fenxiang-xingxing:hover {
+    background-position: -161px -23px;
+}
+
+.fenxiang-baidu:hover {
+    background-position: -184px -23px;
+}
+
+.fenxiang-qqkongjian:hover {
+    background-position: -207px -23px;
+}
+
+.fenxiang-qq:hover {
+    background-position: -230px -23px;
+}
 
 /*一些常用操作*/
-.clearfix{
-    zoom:1;
-    *zoom:1;
+.clearfix {
+    zoom: 1;
+    *zoom: 1;
 }
-.clearfix:after{
+
+.clearfix:after {
     clear: both;
     content: "";
     display: block;
@@ -29,26 +176,31 @@ table { border-collapse:collapse; border-spacing:0; }
     height: 0;
     visibility: hidden;
 }
-.font0{
+
+.font0 {
     font-size: 0;
 }
-.fontBolder{
+
+.fontBolder {
     font-size: 12px;
     font-weight: bolder;
 }
-.ellipsis{
+
+.ellipsis {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-.reduce-opacity:hover{
+
+.reduce-opacity:hover {
     opacity: .8;
     filter: alpha(opacity:.8);
 }
+
 /*顶部栏*/
-header{
+header {
     position: fixed;
-    top:0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 39px;
@@ -56,31 +208,39 @@ header{
     z-index: 9999;
     overflow: hidden;
 }
-header .logo{
+
+header .logo {
     float: left;
     margin-left: 140px;
 }
-header .logo a img{
+
+header .logo a img {
     width: 80px;
     height: 37px;
 }
-header ul{
+
+header ul {
     float: left;
     margin-left: 90px;
 }
-header ul li{
+
+header ul li {
     float: left;
     padding-left: 18px;
     padding-right: 18px;
     line-height: 39px;
 }
-header ul li:hover{
-    background-color: rgba(255,255,255,.3);
+
+header ul li:hover {
+    background-color: rgba(255, 255, 255, .3);
 }
-header ul li a{
+
+header ul li a {
     color: #fff;
 }
-.container{
+
+.container {
     margin: 0 140px;
     margin-top: 39px;
 }
+
