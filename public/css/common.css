@@ -361,6 +361,7 @@ footer .footer-bottom i {
 
 /*注册弹出框*/
 .alert-register {
+    display: none;
     position: fixed;
     left: 0;
     top: 0;
@@ -382,6 +383,14 @@ footer .footer-bottom i {
     -webkit-animation-name: xu-zoomIn;
     animation-duration: 400ms;
     -webkit-animation-duration: 400ms;
+}
+
+.alert-register .register-box .close{
+    position: absolute;
+    top:9px;
+    right:12px;
+    width: 25px;
+    height: 25px;
 }
 
 .alert-register .register-box:before {
@@ -450,13 +459,13 @@ footer .footer-bottom i {
     height: 40px;
     margin: 0 auto;
     margin-top: 10px;
-    background-color: #e9e7e8;
+    background-color: #3171b8;
     border: 2px solid #d6d6d6;
     border-radius: 2px;
     text-align: center;
     line-height: 40px;
     font-size: 20px;
-    color: rgba(255, 80, 72, 0.94);
+    color: rgba(255,31,45,0.94);
 }
 
 .alert-register .register-box input {
@@ -466,7 +475,7 @@ footer .footer-bottom i {
     height: 28px;
     outline: none;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 20px;
     background-color: #e9e7e8;
     border: 2px solid #d6d6d6;

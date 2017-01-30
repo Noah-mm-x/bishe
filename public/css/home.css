@@ -1,3 +1,10 @@
+main {
+    width: 1044px;
+    margin-left: 144px;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
 /*左边内容部分*/
 .container-left {
     float: left;
@@ -270,31 +277,35 @@
     overflow: hidden;
 }
 
-.signIn-box > h4 {
+.signIn-box .signIn-temp {
+    display: block;
+}
+
+.signIn-box .signIn-temp > h4 {
     color: #444444;
     margin-top: 18px;
     margin-left: 13px;
 }
 
-.signIn-box > ul {
+.signIn-box .signIn-temp > ul {
     margin-top: 22px;
     margin-left: 13px;
 }
 
-.signIn-box > ul li {
+.signIn-box .signIn-temp > ul li {
     margin-bottom: 6px;
     width: 100%;
     height: 26px;
 }
 
-.signIn-box > ul li span {
+.signIn-box .signIn-temp > ul li span {
     float: left;
     font-size: 12px;
     color: #444444;
     line-height: 26px;
 }
 
-.signIn-box > ul li input {
+.signIn-box .signIn-temp > ul li input {
     float: right;
     width: 192px;
     height: 13px;
@@ -344,6 +355,30 @@
     border: 1px solid #aacae6;
     border-radius: 1px;
     margin-top: -6px;
+}
+
+.signIn-box .show-user-info {
+    display: none;
+    margin-top: 46px;
+    text-align: center;
+}
+
+.signIn-box .show-user-info > img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.signIn-box .show-user-info .user-info {
+    font-size: 14px;
+    color: #666666;
+    margin-top: 20px;
+}
+
+.signIn-box .show-user-info .user-info >span {
+    color: #3171b8;
 }
 
 .signIn-box .other-mode-login {
@@ -436,7 +471,7 @@
     color: #2e8fc9;
 }
 
-.music li{
+.music li {
     width: 100%;
     height: 40px;
     border-bottom: 1px dashed #e6e6e6;
@@ -461,11 +496,11 @@
     color: #2e8fc9;
 }
 
-.music .music-info a .singer-name{
+.music .music-info a .singer-name {
     margin-top: -1px;
 }
 
-.music .music-info a .music-name{
+.music .music-info a .music-name {
     margin-top: 4px;
 }
 
