@@ -10,6 +10,7 @@ const StateCode = {
     FAIL_TO_SAVE_USER_INFO: 6, //保存用户信息失败
     FAIL_TO_CONNECT_DB: 7,     //连接数据库失败
     LENGTH_IS_ZERO: 8,          //长度为0
-    USER_IS_EXISTED : 9         //用户已存在
+    USER_IS_EXISTED : 9,        //用户已存在
+    ALEADY_LOGIN:10              //已经登录过
 };
 module.exports = StateCode;

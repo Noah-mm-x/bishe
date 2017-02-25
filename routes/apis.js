@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var router = express.Router();
 var createConn = require("../sources/CreateConn");
 var stateCode = require("../sources/StateCode");
@@ -9,6 +10,7 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
+//判断是否有用户名和密码
 function checkUserAndPassword(req, res, next) {
     if (!req.body.name) {
         res.json({state: stateCode.NO_USER_NAME, message: "no user name"});
@@ -53,6 +55,8 @@ router.post("/user/login", checkUserAndPassword)
             if (rows.length) {
                 var result = rows[0];
                 if (md5(req.body.pwd) == result.pwd) {
+                    // req.session.currentUserName = result.name;
+                    // req.session.currentUserPwd = result.pwd;
                     res.json({state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
                 } else {
                     res.json({state: stateCode.PASSWORD_WRONG, message: "password wrong"});

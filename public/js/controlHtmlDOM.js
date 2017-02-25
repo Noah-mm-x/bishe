@@ -3,8 +3,13 @@
  */
 $(function () {
 
+    var storage = localStorage;
+
+
 //    顶部图片切换
-    var $switchFrame = $(".image-switch-frame"), $preImage = $(".pre-image ul li"), timer = null;
+    var $switchFrame = $(".image-switch-frame"),
+        $preImage = $(".pre-image ul li"),
+        timer = null;
     $preImage.hover(function () {
         var _self = $(this), showImage;
         timer = setTimeout(function () {
@@ -166,6 +171,8 @@ $(function () {
                         confirmButtonText: '确定'
                     }, function (isConfirm) {
                         if (isConfirm) {
+                            storage.setItem('name', $account.val());
+                            storage.setItem('pwd', md5($password.val()));
                             $userName.html($account.val());
                             $signInTemp.hide();
                             $showUserInfo.show();
@@ -186,5 +193,11 @@ $(function () {
             }
         })
     })
-
+//进入页面检测用户是否登录
+    if (storage.length) {
+        console.log(storage);
+        $userName.html(storage.getItem('name'));
+        $signInTemp.hide();
+        $showUserInfo.show();
+    }
 });
