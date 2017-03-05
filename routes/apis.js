@@ -55,8 +55,8 @@ router.post("/user/login", checkUserAndPassword)
             if (rows.length) {
                 var result = rows[0];
                 if (md5(req.body.pwd) == result.pwd) {
-                    // req.session.currentUserName = result.name;
-                    // req.session.currentUserPwd = result.pwd;
+                    req.session.currentUserName = result.name;
+                    req.session.currentUserPwd = result.pwd;
                     res.json({state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
                 } else {
                     res.json({state: stateCode.PASSWORD_WRONG, message: "password wrong"});

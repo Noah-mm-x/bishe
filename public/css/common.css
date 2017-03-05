@@ -197,7 +197,12 @@ table {
     filter: alpha(opacity:.8);
     /*background-color: #ffffff;*/
 }
-
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
 /*动画*/
 .infinite {
     animation-iteration-count: infinite;
@@ -277,7 +282,13 @@ header ul li a {
     margin-top: 39px;
     overflow: hidden;
 }
-
+/*内容栏 */
+main {
+    width: 1044px;
+    margin-left: 144px;
+    margin-top: 40px;
+    overflow: hidden;
+}
 /*底部栏*/
 footer {
     width: 100%;

@@ -30,6 +30,10 @@ $(function () {
     });
     $('.alert-register .register-box .close').on('click', function () {
         $('.alert-register').fadeOut();
+        $registerAccount.val('');
+        $registerPassword.val('');
+        $registerConfirmPassword.val('');
+        hideInfo();
     });
 
     var $registerInfo = $('.register-info');
@@ -51,13 +55,21 @@ $(function () {
 
     $registerAccount.blur(function () {
         var _self = $(this);
+        if (_self.val() == '' || _self.val().length === 0 || _self.val() == undefined) {
+            showInfo('用户名不能为空！');
+            return false;
+        }
         if (_self.val().length > 12) {
             showInfo('用户名长度不能超过12位');
             return false;
-        } else {
-            accountFlag = true;
-            hideInfo();
         }
+        if (_self.val().length < 6) {
+            showInfo('用户名不能少于6位');
+            return false;
+        }
+
+        accountFlag = true;
+        hideInfo();
     });
 
     $registerPassword.blur(function () {
@@ -104,6 +116,19 @@ $(function () {
 
     $registerBtn.on("click", function () {
         // if (!accountFlag || !passwordFlag || !confirmFlag) return false;
+        if (!accountFlag) {
+            swal('用户名不符合要求！');
+            return false;
+        }
+        if (!passwordFlag) {
+            swal('密码不符合要求！');
+            return false;
+        }
+        if (!confirmFlag) {
+            swal('确认密码不符合要求！');
+            return false;
+        }
+
         $.post('/apis/user/register', {
             name: $registerAccount.val(),
             pwd: md5($registerPassword.val())
@@ -119,6 +144,9 @@ $(function () {
                         confirmButtonText: '确定'
                     }, function (isConfirm) {
                         if (isConfirm) $('.alert-register').hide();
+                        $registerAccount.val('');
+                        $registerPassword.val('');
+                        $registerConfirmPassword.val('');
                     });
                     break;
                 case 9:
@@ -189,15 +217,71 @@ $(function () {
                     $password.val("");
                 default:
                     swal('未知错误');
+                    console.log(data.message);
                     break;
             }
         })
     })
 //进入页面检测用户是否登录
     if (storage.length) {
-        console.log(storage);
         $userName.html(storage.getItem('name'));
         $signInTemp.hide();
         $showUserInfo.show();
+    }
+
+    //梦感觉  分页
+    var feelBox = $('.feel-right .content'),
+        maxPageNum = 16;//每页最大卡片个数
+    // return false;
+    $.getJSON('../data/feel.json', function (data) {
+        console.log(data.articles.length);
+        var item = data.articles, length = Math.ceil(data.articles.length/maxPageNum), pageIndex;
+        //默认页面显示内容
+        for (var i = 0; i < maxPageNum; i++) {
+            feelBox.append(new feelCard(item[i].image,item[i].title,item[i].content,
+                item[i].avatarAvatar,item[i].avatarName,item[i].avatarDate));
+        }
+        $(".M-box").pagination({
+            pageCount: length,
+            jump: true,
+            coping: true,
+            homePage: '首页',
+            endPage: '末页',
+            preContent: '上页',
+            nextContent: '下页',
+            callback: function (index) {
+                pageIndex = index.getCurrent() - 1;
+                console.log(pageIndex);
+                feelBox.empty();
+                for (var i = 0; i < maxPageNum; i++) {
+                    var j = maxPageNum * pageIndex + i;
+                    if (item[j]) {
+                        feelBox.append(new feelCard(item[j].image, item[j].title,
+                            item[j].content, item[j].avatarAvatar, item[j].avatarName,
+                            item[j].avatarDate));
+                    }
+                }
+                backToTop();
+            }
+        })
+    });
+    function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
+        var card = '<li>' +
+                        '<img class="img" src="images/feel/'+image+'" alt="">' +
+                        '<div class="title" title="'+title+'"><a class="ellipsis" href="javascript:;">'+title+'</a></div>' +
+                        ' <div class="content">'+content+'</div>' +
+                        '<div class="author">' +
+                            '<img class="author-avatar left" src="images/avatar/feel/'+authorAvatar+'" alt="">' +
+                                '<div class="author-info left">' +
+                                    '<p class="name">作者：<span>'+authorName+'</span></p>' +
+                                    '<p class="date">发布于：<span>'+authorDate+'</span></p>' +
+                                '</div>' +
+                        '</div>' +
+                    ' </li>';
+        return $(card);
+    }
+    // 返回顶部
+    function backToTop() {
+        $('body,html').animate({scrollTop:0},400);
     }
 });
