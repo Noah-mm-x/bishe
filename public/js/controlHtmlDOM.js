@@ -183,6 +183,7 @@ $(function () {
         $signInTemp = $('.signIn-temp'),
         $showUserInfo = $('.show-user-info'),
         $userName = $('.signIn-box .show-user-info .user-info >span');
+
     $signInBtn.click(function (e) {
         e.preventDefault();
         $.post('/apis/user/login', {
@@ -222,49 +223,70 @@ $(function () {
             }
         })
     })
+//    退出登录
+    var exit = $('.exit-login');
+    exit.click(function (e) {
+        e.preventDefault();
+        $.post('/apis/user/exit').done(function (data) {
+            if (data.state == 11 ){
+                swal('退出成功');
+                storage.setItem('name','');
+                $signInTemp.show();
+                $showUserInfo.hide();
+            }else{
+                swal('未知错误');
+            }
+        })
+    });
+
 //进入页面检测用户是否登录
-    if (storage.length) {
+    var $avatar = $('.signIn-box .show-user-info > .avatar');
+    if (storage.getItem('name').length) {
         $userName.html(storage.getItem('name'));
+        $avatar.html(getFirstWord(storage.getItem('name')));
         $signInTemp.hide();
         $showUserInfo.show();
     }
 
     //梦感觉  分页
-    var feelBox = $('.feel-right .content'),
-        maxPageNum = 16;//每页最大卡片个数
-    // return false;
-    $.getJSON('../data/feel.json', function (data) {
-        console.log(data.articles.length);
-        var item = data.articles, length = Math.ceil(data.articles.length/maxPageNum), pageIndex;
-        //默认页面显示内容
-        for (var i = 0; i < maxPageNum; i++) {
-            feelBox.append(new feelCard(item[i].image,item[i].title,item[i].content,
-                item[i].avatarAvatar,item[i].avatarName,item[i].avatarDate));
-        }
-        $(".M-box").pagination({
-            pageCount: length,
-            jump: true,
-            coping: true,
-            homePage: '首页',
-            endPage: '末页',
-            preContent: '上页',
-            nextContent: '下页',
-            callback: function (index) {
-                pageIndex = index.getCurrent() - 1;
-                console.log(pageIndex);
-                feelBox.empty();
-                for (var i = 0; i < maxPageNum; i++) {
-                    var j = maxPageNum * pageIndex + i;
-                    if (item[j]) {
-                        feelBox.append(new feelCard(item[j].image, item[j].title,
-                            item[j].content, item[j].avatarAvatar, item[j].avatarName,
-                            item[j].avatarDate));
-                    }
-                }
-                backToTop();
+    if ($('.feel').length){
+        var feelBox = $('.feel-right .content'),
+            maxPageNum = 16;//每页最大卡片个数
+        // return false;
+        $.getJSON('../data/feel.json', function (data) {
+            console.log(data.articles.length);
+            var item = data.articles, length = Math.ceil(data.articles.length/maxPageNum), pageIndex;
+            //默认页面显示内容
+            for (var i = 0; i < maxPageNum; i++) {
+                feelBox.append(new feelCard(item[i].image,item[i].title,item[i].content,
+                    item[i].avatarAvatar,item[i].avatarName,item[i].avatarDate));
             }
-        })
-    });
+            $(".M-box").pagination({
+                pageCount: length,
+                jump: true,
+                coping: true,
+                homePage: '首页',
+                endPage: '末页',
+                preContent: '上页',
+                nextContent: '下页',
+                callback: function (index) {
+                    pageIndex = index.getCurrent() - 1;
+                    console.log(pageIndex);
+                    feelBox.empty();
+                    for (var i = 0; i < maxPageNum; i++) {
+                        var j = maxPageNum * pageIndex + i;
+                        if (item[j]) {
+                            feelBox.append(new feelCard(item[j].image, item[j].title,
+                                item[j].content, item[j].avatarAvatar, item[j].avatarName,
+                                item[j].avatarDate));
+                        }
+                    }
+                    backToTop();
+                }
+            })
+        });
+    }
+
     function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
         var card = '<li>' +
                         '<img class="img" src="images/feel/'+image+'" alt="">' +
@@ -283,5 +305,9 @@ $(function () {
     // 返回顶部
     function backToTop() {
         $('body,html').animate({scrollTop:0},400);
+    }
+    //获取用户名字第一个字
+    function getFirstWord(target) {
+        return target.substring(0,1);
     }
 });

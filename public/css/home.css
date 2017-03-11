@@ -358,18 +358,38 @@
     text-align: center;
 }
 
-.signIn-box .show-user-info > img {
+.signIn-box .show-user-info > .avatar {
     display: block;
     width: 80px;
     height: 80px;
     border-radius: 50%;
     margin: 0 auto;
+    font-size: 48px;
+    color: #7d7d7d;
+    background-color: #e4e4e4;
+    text-align: center;
+    line-height: 70px;
 }
 
 .signIn-box .show-user-info .user-info {
     font-size: 14px;
     color: #666666;
     margin-top: 20px;
+}
+
+.signIn-box .show-user-info > .exit-login{
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 70px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #3171b8;
+    user-select: none;
+    cursor: pointer;
 }
 
 .signIn-box .show-user-info .user-info >span {

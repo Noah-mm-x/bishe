@@ -70,5 +70,17 @@ router.post("/user/login", checkUserAndPassword)
         })
     });
 
+router.post('/user/exit',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1().then(result=>{
+        req.session.currentUserName = null;
+        req.session.currentUserPwd = null;
+    }).then(result => {
+        res.json({state: stateCode.EXIT_LOGIN_SUCCESS, message: "OK"});
+        conn.end();
+    }).catch(error => {
+        res.json({state: error.errno, message: error.code});
+    })
+});
 
 module.exports = router;
