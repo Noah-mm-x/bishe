@@ -182,7 +182,8 @@ $(function () {
         $signInBtn = $('.signIn-box .remember-and-login .remember > a'),
         $signInTemp = $('.signIn-temp'),
         $showUserInfo = $('.show-user-info'),
-        $userName = $('.signIn-box .show-user-info .user-info >span');
+        $userName = $('.signIn-box .show-user-info .user-info >span'),
+        $avatar = $('.signIn-box .show-user-info > .avatar');
 
     $signInBtn.click(function (e) {
         e.preventDefault();
@@ -205,6 +206,7 @@ $(function () {
                             $userName.html($account.val());
                             $signInTemp.hide();
                             $showUserInfo.show();
+                            $avatar.html(getFirstWord($account.val()));
                         }
                     });
                     break;
@@ -240,7 +242,7 @@ $(function () {
     });
 
 //进入页面检测用户是否登录
-    var $avatar = $('.signIn-box .show-user-info > .avatar');
+
     if (storage.getItem('name').length) {
         $userName.html(storage.getItem('name'));
         $avatar.html(getFirstWord(storage.getItem('name')));
