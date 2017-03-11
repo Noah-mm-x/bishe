@@ -290,11 +290,13 @@ $(function () {
 
     function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
         var card = '<li>' +
-                        '<img class="img" src="images/feel/'+image+'" alt="">' +
+                        '<div class="card-img-box">' +
+                            '<img class="img" src="images/feel/'+image+'" alt="">' +
+                        '</div>'+
                         '<div class="title" title="'+title+'"><a class="ellipsis" href="javascript:;">'+title+'</a></div>' +
                         ' <div class="content">'+content+'</div>' +
                         '<div class="author">' +
-                            '<img class="author-avatar left" src="images/avatar/feel/'+authorAvatar+'" alt="">' +
+                                '<img class="author-avatar left" src="images/avatar/feel/'+authorAvatar+'" alt="">' +
                                 '<div class="author-info left">' +
                                     '<p class="name">作者：<span>'+authorName+'</span></p>' +
                                     '<p class="date">发布于：<span>'+authorDate+'</span></p>' +
