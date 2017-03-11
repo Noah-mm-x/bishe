@@ -253,10 +253,9 @@ $(function () {
     //梦感觉  分页
     if ($('.feel').length){
         var feelBox = $('.feel-right .content'),
-            maxPageNum = 16;//每页最大卡片个数
+            maxPageNum = 16;        //每页最大卡片个数
         // return false;
         $.getJSON('../data/feel.json', function (data) {
-            console.log(data.articles.length);
             var item = data.articles, length = Math.ceil(data.articles.length/maxPageNum), pageIndex;
             //默认页面显示内容
             for (var i = 0; i < maxPageNum; i++) {

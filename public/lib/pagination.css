@@ -13,6 +13,11 @@
     height: 40px;
     text-align: center;
   	zoom: 1;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .M-box:before,.M-box:after{
     content:"";

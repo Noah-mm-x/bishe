@@ -134,3 +134,12 @@ main {
 .feel-right .content li .author-info .date span {
     color: #123456;
 }
+
+.M-box-parent{
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
