@@ -288,20 +288,208 @@ $(function () {
         });
     }
 
+    //梦思想
+    if ($('.idea').length){
+        // 推荐标签背景色 #fcc #cfc #ccf #ffc #fcf #cff
+
+        /*
+         * 对象为标签
+         * width                 : 宽度
+         * height                : 高度
+         * backgroundColor       ：背景颜色
+         * left                  ：左部偏移
+         * top                   ：顶部偏移
+         * rotateDeg             ：旋转角度
+         */
+        $.fn.labelWall = function (options) {
+            var $this = $(this);
+            var settings = $.extend({
+                'width': '250',
+                'height': '250',
+                'backgroundColor': '#fcc',
+                'left': '0',
+                'top': '0',
+                'rotateDeg': '0',
+                'title': '',
+                'content': '',
+                'name': ''
+            }, options);
+
+            var init = function () {
+                $this.css({
+                    'width': settings.width + 'px',
+                    'height': settings.height + 'px',
+                    'backgroundColor': settings.backgroundColor,
+                    'left': settings.left + 'px',
+                    'top': settings.top + 'px',
+                    '-webkit-transform': 'rotate(' + settings.rotateDeg + 'deg)'
+                });
+
+                var tagNailLeft = '<div class="tag-nail tag-nail-left"></div>',
+                    tagNailRight = '<div class="tag-nail tag-nail-right"></div>',
+                    title = '<div class="label-title">' + settings.title + '</div>',
+                    content = '<div class="label-content">' + settings.content + '</div>',
+                    name = '<div class="label-name">—— ' + settings.name + '</div>';
+                $this.prepend(tagNailLeft).prepend(tagNailRight)
+                    .append(title).append(content).append(name);
+            };
+            var events = {
+                drag: function () {
+                    var offsetX, offsetY,
+                        mouseX = $this.position().left,
+                        mouseY = $this.position().top;
+
+                    $this.on('mousedown', function (e) {
+                        $this.css('zIndex',9999);
+
+                        offsetX = mouseX - e.pageX;
+                        offsetY = mouseY - e.pageY;
+
+                        document.onmousemove = function (e) {
+                            mouseX = e.pageX + offsetX;
+                            mouseY = e.pageY + offsetY;
+
+                            $this.css({
+                                'left': mouseX + 'px',
+                                'top': mouseY + 'px'
+                            })
+                        };
+
+                        document.onmouseup = function () {
+                            $this.css('zIndex',0);
+
+                            document.onmousemove = null;
+                            document.onmouseup = null;
+                        }
+                    });
+                },
+                larger: function () {
+                    var timer = null,
+                        matrix = $this.css('-webkit-transform'); //获取下元素的transform的初始状态
+                    $this.hover(function () {
+                        timer = setTimeout(function () {
+                            $this.css({
+                                '-webkit-transition': 'all 800ms ease-in-out',
+                                '-webkit-transform': 'scale(1.2)'
+                            });
+                        }, 0);
+                    }, function () {
+                        clearTimeout(timer);
+                        $this.css({
+                            '-webkit-transform': matrix
+                        });
+                    })
+                },
+                delete: function () {
+                    $this.find('.tag-nail').on('click', function () {
+                        var _self = $(this);
+                        if(_self.hasClass('tag-nail-right')){
+                            $this.css('webkitTransformOrigin', '0 0');
+                            $this.addClass('clockwise-rotate-animate');
+                            $this.on('webkitAnimationEnd', function () {
+                                $this.addClass('clockwise-down-animate');
+                                $this.on('webkitAnimationEnd', function () {
+                                    $this.hide();
+                                })
+                            })
+                        }
+                        if(_self.hasClass('tag-nail-left')){
+                            $this.css('webkitTransformOrigin', $this.width() + 'px 0');
+                            $this.addClass('anticlockwise-rotate-animate');
+                            $this.on('webkitAnimationEnd', function () {
+                                $this.addClass('anticlockwise-down-animate');
+                                $this.on('webkitAnimationEnd', function () {
+                                    $this.hide();
+                                })
+                            })
+                        }
+                    })
+                }
+            };
+            init();
+            events.drag();
+            events.delete();
+            // events.larger();
+            return this;
+        };
+        var $box1 = $('.label-box.label-box1'),
+            $box2 = $('.label-box.label-box2'),
+            $box3 = $('.label-box.label-box3'),
+            $box4 = $('.label-box.label-box4'),
+            $box5 = $('.label-box.label-box5'),
+            $box6 = $('.label-box.label-box6');
+        $box1.labelWall({
+            'left': '100',
+            'top': '100',
+            'backgroundColor': '#ffc',
+            'rotateDeg': '5',
+            'title': '',
+            'content': '平凡的脚步也可以走完伟大的行程。',
+            'name': '稔'
+        });
+        $box2.labelWall({
+            'left': '600',
+            'top': '300',
+            'backgroundColor': '#cfc',
+            'rotateDeg': '3',
+            'title': '',
+            'content': '无论才能知识多么卓著，如果缺乏热情，则无异纸上画饼充饥，无补于事。',
+            'name': 'Honey.'
+        });
+        $box3.labelWall({
+            'left': '200',
+            'top': '400',
+            'backgroundColor': '#cff',
+            'rotateDeg': '-3',
+            'title':'',
+            'content':'痛苦是性格的催化剂，它使强者更强，弱者更弱，仁者更仁，暴者更暴，智者更智，愚者更愚。',
+            'name':'静夜明'
+        });
+        $box4.labelWall({
+            'left': '800',
+            'top': '400',
+            'backgroundColor': '#fcf',
+            'rotateDeg': '-2',
+            'title':'',
+            'content':'只有一条路不能选择——那就是放弃的路;只有一条路不能拒绝——那就是成长的路。',
+            'name':'Eva&'
+        });
+        $box5.labelWall({
+            'left': '400',
+            'top': '100',
+            'backgroundColor': '#ccf',
+            'rotateDeg': '19',
+            'title':'',
+            'content':'成功是优点的发挥，失败是缺点的累积。走对了路的原因只有一种，走错了路的原因却有很多。',
+            'name':'禅宿'
+        });
+        $box6.labelWall({
+            'left': '900',
+            'top': '200',
+            'backgroundColor': '#fcc',
+            'rotateDeg': '12',
+            'title':'',
+            'content':'桂冠上的飘带，不是用天才纤维捻制而成的，而是用痛苦，磨难的丝缕纺织出来的。',
+            'name':'青青子衿'
+        });
+    }
+
     function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
         var card = '<li>' +
-                        '<div class="card-img-box">' +
-                            '<img class="img" src="images/feel/'+image+'" alt="">' +
-                        '</div>'+
-                        '<div class="title" title="'+title+'"><a class="ellipsis" href="javascript:;">'+title+'</a></div>' +
-                        ' <div class="content">'+content+'</div>' +
-                        '<div class="author">' +
-                                '<img class="author-avatar left" src="images/avatar/feel/'+authorAvatar+'" alt="">' +
-                                '<div class="author-info left">' +
-                                    '<p class="name">作者：<span>'+authorName+'</span></p>' +
-                                    '<p class="date">发布于：<span>'+authorDate+'</span></p>' +
-                                '</div>' +
-                        '</div>' +
+                        '<a  href="javascript:;" >'+
+                            '<div class="card-img-box">' +
+                                '<img class="img" src="images/feel/'+image+'" alt="">' +
+                            '</div>'+
+                            '<div class="title" title="'+title+'"><p class="ellipsis">'+title+'</p></div>' +
+                            ' <div class="content">'+content+'</div>' +
+                            '<div class="author">' +
+                                    '<img class="author-avatar left" src="images/avatar/feel/'+authorAvatar+'" alt="">' +
+                                    '<div class="author-info left">' +
+                                        '<p class="name">作者：<span>'+authorName+'</span></p>' +
+                                        '<p class="date">发布于：<span>'+authorDate+'</span></p>' +
+                                    '</div>' +
+                            '</div>' +
+                        '</a>'
                     ' </li>';
         return $(card);
     }
