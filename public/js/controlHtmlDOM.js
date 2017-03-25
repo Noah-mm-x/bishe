@@ -256,7 +256,9 @@ $(function () {
             maxPageNum = 16;        //每页最大卡片个数
         // return false;
         $.getJSON('../data/feel.json', function (data) {
-            var item = data.articles, length = Math.ceil(data.articles.length/maxPageNum), pageIndex;
+            var item   = data.articles,
+                length = Math.ceil(data.articles.length/maxPageNum),
+                pageIndex;
             //默认页面显示内容
             for (var i = 0; i < maxPageNum; i++) {
                 feelBox.append(new feelCard(item[i].image,item[i].title,item[i].content,
@@ -412,66 +414,38 @@ $(function () {
             // events.larger();
             return this;
         };
-        var $box1 = $('.label-box.label-box1'),
-            $box2 = $('.label-box.label-box2'),
-            $box3 = $('.label-box.label-box3'),
-            $box4 = $('.label-box.label-box4'),
-            $box5 = $('.label-box.label-box5'),
-            $box6 = $('.label-box.label-box6');
-        $box1.labelWall({
-            'left': '100',
-            'top': '100',
-            'backgroundColor': '#ffc',
-            'rotateDeg': '5',
-            'title': '',
-            'content': '平凡的脚步也可以走完伟大的行程。',
-            'name': '稔'
+        var $box=[
+                $('.label-box.label-box1'),
+                $('.label-box.label-box2'),
+                $('.label-box.label-box3'),
+                $('.label-box.label-box4'),
+                $('.label-box.label-box5'),
+                $('.label-box.label-box6')
+            ],
+            randomNum,
+            boxLen                = $('.label-box-container .label-box').length,
+            leftRandom            = createRandom(90,1000,boxLen),
+            topRandom             = createRandom(140,460,boxLen),
+            rotateRandom          = createRandom(-15,15,boxLen),
+            backgroundColor       = createRandom(0,5,6),
+            backgroundColorSelect = ['#fcc','#cfc','#ccf','#ffc','#fcf','#cff'];
+
+        $.getJSON('../data/idea.json',function (data) {
+            console.log(data);
+            var items = data.verse;
+            randomNum = createRandom(0,items.length-1,boxLen);
+            for(var i = 0;i < boxLen;i++){
+                $box[i].labelWall({
+                    'left':leftRandom[i],
+                    'top' : topRandom[i],
+                    'backgroundColor':backgroundColorSelect[backgroundColor[i]],
+                    'rotateDeg':rotateRandom[i],
+                    'content':items[randomNum[i]].content,
+                    'name':items[randomNum[i]].author
+                })
+            }
         });
-        $box2.labelWall({
-            'left': '600',
-            'top': '300',
-            'backgroundColor': '#cfc',
-            'rotateDeg': '3',
-            'title': '',
-            'content': '无论才能知识多么卓著，如果缺乏热情，则无异纸上画饼充饥，无补于事。',
-            'name': 'Honey.'
-        });
-        $box3.labelWall({
-            'left': '200',
-            'top': '400',
-            'backgroundColor': '#cff',
-            'rotateDeg': '-3',
-            'title':'',
-            'content':'痛苦是性格的催化剂，它使强者更强，弱者更弱，仁者更仁，暴者更暴，智者更智，愚者更愚。',
-            'name':'静夜明'
-        });
-        $box4.labelWall({
-            'left': '800',
-            'top': '400',
-            'backgroundColor': '#fcf',
-            'rotateDeg': '-2',
-            'title':'',
-            'content':'只有一条路不能选择——那就是放弃的路;只有一条路不能拒绝——那就是成长的路。',
-            'name':'Eva&'
-        });
-        $box5.labelWall({
-            'left': '400',
-            'top': '100',
-            'backgroundColor': '#ccf',
-            'rotateDeg': '19',
-            'title':'',
-            'content':'成功是优点的发挥，失败是缺点的累积。走对了路的原因只有一种，走错了路的原因却有很多。',
-            'name':'禅宿'
-        });
-        $box6.labelWall({
-            'left': '900',
-            'top': '200',
-            'backgroundColor': '#fcc',
-            'rotateDeg': '12',
-            'title':'',
-            'content':'桂冠上的飘带，不是用天才纤维捻制而成的，而是用痛苦，磨难的丝缕纺织出来的。',
-            'name':'青青子衿'
-        });
+
     }
 
     function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
@@ -500,5 +474,24 @@ $(function () {
     //获取用户名字第一个字
     function getFirstWord(target) {
         return target.substring(0,1);
+    }
+    //产生不同随机数
+    function createRandom(min, max,num) {
+        var tempArr = [],
+            resultArr= [],
+            i = min,
+            len = max + 1,
+            item,index,flag;
+        for (i ; i < len; i++) {
+            tempArr.push(i);
+        }
+        do{
+            flag = true;
+            index = Math.floor(Math.random() * tempArr.length);
+            resultArr.push(tempArr[index]);
+            tempArr.splice(index, 1);
+            flag = ~~tempArr.length;
+        }while (flag);
+        return resultArr.splice(len-max,num);
     }
 });
