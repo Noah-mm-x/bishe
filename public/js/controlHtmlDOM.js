@@ -424,12 +424,11 @@ $(function () {
             ],
             randomNum,
             boxLen                = $('.label-box-container .label-box').length,
-            leftRandom            = createRandom(90,1000,boxLen),
-            topRandom             = createRandom(140,460,boxLen),
+            leftRandom            = createRandom(90,1000,boxLen,100),
+            topRandom             = createRandom(140,460,boxLen,20),
             rotateRandom          = createRandom(-15,15,boxLen),
             backgroundColor       = createRandom(0,5,6),
             backgroundColorSelect = ['#fcc','#cfc','#ccf','#ffc','#fcf','#cff'];
-
         $.getJSON('../data/idea.json',function (data) {
             console.log(data);
             var items = data.verse;
@@ -476,13 +475,23 @@ $(function () {
         return target.substring(0,1);
     }
     //产生不同随机数
-    function createRandom(min, max,num) {
+
+    /**
+     *
+     * @param min 最小值
+     * @param max 最大值
+     * @param num 个数
+     * @param span 跨度（相邻两个数字的间隔）
+     * @returns {Array.<*>}
+     */
+    function createRandom(min, max,num,span) {
         var tempArr = [],
             resultArr= [],
             i = min,
             len = max + 1,
+            span = span || 1,
             item,index,flag;
-        for (i ; i < len; i++) {
+        for (i ; i < len; i = i+ span) {
             tempArr.push(i);
         }
         do{
@@ -492,6 +501,6 @@ $(function () {
             tempArr.splice(index, 1);
             flag = ~~tempArr.length;
         }while (flag);
-        return resultArr.splice(len-max,num);
+        return len > max ? resultArr.splice(len-max,num) : 0;
     }
 });
