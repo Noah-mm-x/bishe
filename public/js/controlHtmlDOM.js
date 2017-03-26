@@ -129,7 +129,7 @@ $(function () {
             return false;
         }
 
-        $.post('/apis/user/register', {
+        $.post('/page/user/register', {
             name: $registerAccount.val(),
             pwd: md5($registerPassword.val())
         }).done(function (data) {
@@ -187,7 +187,7 @@ $(function () {
 
     $signInBtn.click(function (e) {
         e.preventDefault();
-        $.post('/apis/user/login', {
+        $.post('/page/user/login', {
             name: $account.val(),
             pwd: md5($password.val())
         }).done(function (data) {
@@ -229,7 +229,7 @@ $(function () {
     var exit = $('.exit-login');
     exit.click(function (e) {
         e.preventDefault();
-        $.post('/apis/user/exit').done(function (data) {
+        $.post('/page/user/exit').done(function (data) {
             if (data.state == 11 ){
                 swal('退出成功');
                 storage.setItem('name','');
@@ -429,7 +429,7 @@ $(function () {
             rotateRandom = createRandom(-15, 15, boxLen),
             backgroundColor = createRandom(0, 5, 6),
             backgroundColorSelect = ['#fcc', '#cfc', '#ccf', '#ffc', '#fcf', '#cff'];
-        $.post('/apis/idea/articles').done(function (datas) {
+        $.post('/page/idea/articles').done(function (datas) {
             if (datas.state == 1000) {
                 var items = datas.data;
                 randomNum = createRandom(0, items.length - 1, boxLen);

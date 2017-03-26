@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var session = require('express-session');
 var router = express.Router();
 var createConn = require("../sources/CreateConn");
@@ -8,6 +9,9 @@ const md5 = require("md5-js");
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
+});
+router.get('/feel', function(req, res) {
+    res.sendfile('./public/feel.html');
 });
 
 //判断是否有用户名和密码
