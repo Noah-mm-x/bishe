@@ -21,7 +21,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use("/page/css",  express.static('./public/css'));
+app.use("/page/js", express.static( './public/js'));
+app.use("/page/images",  express.static( './public/images'));
+app.use("/page/lib",  express.static( './public/lib'));
 app.use(session({secret: "mengfanxu", resave: false, saveUninitialized: false}));
 
 app.use('/', index);

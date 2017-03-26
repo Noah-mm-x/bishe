@@ -10,9 +10,19 @@ const md5 = require("md5-js");
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
-router.get('/feel', function(req, res) {
-    res.sendfile('./public/feel.html');
+router.get('/page', function(req, res) {
+    res.sendfile( './public/css');
 });
+router.get('/index', function(req, res) {
+    res.sendfile( './public/index.html');
+});
+router.get('/feel', function(req, res) {
+    res.sendfile( './public/feel.html');
+});
+router.get('/idea', function(req, res) {
+    res.sendfile( './public/idea.html');
+});
+
 
 //判断是否有用户名和密码
 function checkUserAndPassword(req, res, next) {
