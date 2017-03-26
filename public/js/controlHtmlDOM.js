@@ -291,7 +291,7 @@ $(function () {
     }
 
     //梦思想
-    if ($('.idea').length){
+    if ($('.idea').length) {
         // 推荐标签背景色 #fcc #cfc #ccf #ffc #fcf #cff
 
         /*
@@ -342,7 +342,7 @@ $(function () {
                         mouseY = $this.position().top;
 
                     $this.on('mousedown', function (e) {
-                        $this.css('zIndex',9999);
+                        $this.css('zIndex', 9999);
 
                         offsetX = mouseX - e.pageX;
                         offsetY = mouseY - e.pageY;
@@ -358,7 +358,7 @@ $(function () {
                         };
 
                         document.onmouseup = function () {
-                            $this.css('zIndex',0);
+                            $this.css('zIndex', 0);
 
                             document.onmousemove = null;
                             document.onmouseup = null;
@@ -385,7 +385,7 @@ $(function () {
                 delete: function () {
                     $this.find('.tag-nail').on('click', function () {
                         var _self = $(this);
-                        if(_self.hasClass('tag-nail-right')){
+                        if (_self.hasClass('tag-nail-right')) {
                             $this.css('webkitTransformOrigin', '0 0');
                             $this.addClass('clockwise-rotate-animate');
                             $this.on('webkitAnimationEnd', function () {
@@ -395,7 +395,7 @@ $(function () {
                                 })
                             })
                         }
-                        if(_self.hasClass('tag-nail-left')){
+                        if (_self.hasClass('tag-nail-left')) {
                             $this.css('webkitTransformOrigin', $this.width() + 'px 0');
                             $this.addClass('anticlockwise-rotate-animate');
                             $this.on('webkitAnimationEnd', function () {
@@ -414,7 +414,7 @@ $(function () {
             // events.larger();
             return this;
         };
-        var $box=[
+        var $box = [
                 $('.label-box.label-box1'),
                 $('.label-box.label-box2'),
                 $('.label-box.label-box3'),
@@ -423,29 +423,37 @@ $(function () {
                 $('.label-box.label-box6')
             ],
             randomNum,
-            boxLen                = $('.label-box-container .label-box').length,
-            leftRandom            = createRandom(90,1000,boxLen,100),
-            topRandom             = createRandom(140,460,boxLen,20),
-            rotateRandom          = createRandom(-15,15,boxLen),
-            backgroundColor       = createRandom(0,5,6),
-            backgroundColorSelect = ['#fcc','#cfc','#ccf','#ffc','#fcf','#cff'];
-        $.getJSON('../data/idea.json',function (data) {
-            console.log(data);
-            var items = data.verse;
-            randomNum = createRandom(0,items.length-1,boxLen);
-            for(var i = 0;i < boxLen;i++){
-                $box[i].labelWall({
-                    'left':leftRandom[i],
-                    'top' : topRandom[i],
-                    'backgroundColor':backgroundColorSelect[backgroundColor[i]],
-                    'rotateDeg':rotateRandom[i],
-                    'content':items[randomNum[i]].content,
-                    'name':items[randomNum[i]].author
+            boxLen = $('.label-box-container .label-box').length,
+            leftRandom = createRandom(90, 1000, boxLen, 100),
+            topRandom = createRandom(140, 460, boxLen, 20),
+            rotateRandom = createRandom(-15, 15, boxLen),
+            backgroundColor = createRandom(0, 5, 6),
+            backgroundColorSelect = ['#fcc', '#cfc', '#ccf', '#ffc', '#fcf', '#cff'];
+        $.post('/apis/idea/articles').done(function (datas) {
+            if (datas.state == 1000) {
+                var items = datas.data;
+                randomNum = createRandom(0, items.length - 1, boxLen);
+                for (var i = 0; i < boxLen; i++) {
+                    $box[i].labelWall({
+                        'left': leftRandom[i],
+                        'top': topRandom[i],
+                        'backgroundColor': backgroundColorSelect[backgroundColor[i]],
+                        'rotateDeg': rotateRandom[i],
+                        'content': items[randomNum[i]].content,
+                        'name': items[randomNum[i]].author
+                    })
+                }
+            } else {
+                swal({
+                    'title': '数据获取失败，请刷新重试!',
+                    'type': 'warning'
                 })
             }
         });
-
     }
+
+
+
 
     function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
         var card = '<li>' +
