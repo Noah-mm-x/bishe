@@ -262,7 +262,7 @@ $(function () {
             //默认页面显示内容
             for (var i = 0; i < maxPageNum; i++) {
                 feelBox.append(new feelCard(item[i].image,item[i].title,item[i].content,
-                    item[i].avatarAvatar,item[i].avatarName,item[i].avatarDate));
+                    item[i].avatarAvatar,item[i].avatarName,item[i].avatarDate,item[i].link));
             }
             $(".M-box").pagination({
                 pageCount: length,
@@ -274,20 +274,42 @@ $(function () {
                 nextContent: '下页',
                 callback: function (index) {
                     pageIndex = index.getCurrent() - 1;
-                    console.log(pageIndex);
                     feelBox.empty();
                     for (var i = 0; i < maxPageNum; i++) {
                         var j = maxPageNum * pageIndex + i;
                         if (item[j]) {
                             feelBox.append(new feelCard(item[j].image, item[j].title,
                                 item[j].content, item[j].avatarAvatar, item[j].avatarName,
-                                item[j].avatarDate));
+                                item[j].avatarDate,item[j].link));
                         }
                     }
                     backToTop();
                 }
             })
         });
+    }
+
+    // 梦感觉 文章详情页
+    if ($('.feel-article').length){
+        var linkSearch = window.location.search.replace('?',''),
+            articleTitle = $('.feel-article-content .title'),
+            articleImage = $('.feel-article-content .image'),
+            articleContent = $('.feel-article-content .content'),
+            articleAuthor = $('.feel-article-content .author span');
+       $.post('/page/feel/articles',{
+           link:parseInt(linkSearch)
+       }).done(function (datas) {
+           if (datas.state == 1000) {
+               var data = datas.data[0];
+               console.log(data);
+               articleTitle.html(data.title);
+               articleImage.attr('src','images/feel/'+data.image);
+               articleContent.html(data.content);
+               articleAuthor.html(data.author);
+           }
+       }).fail(function (err) {
+           console.log(err);
+       })
     }
 
     //梦思想
@@ -455,9 +477,9 @@ $(function () {
 
 
 
-    function feelCard(image, title, content, authorAvatar, authorName, authorDate) {
+    function feelCard(image, title, content, authorAvatar, authorName, authorDate,link) {
         var card = '<li>' +
-                        '<a  href="javascript:;" >'+
+                        '<a  href=feel/article?'+link+'>'+
                             '<div class="card-img-box">' +
                                 '<img class="img" src="images/feel/'+image+'" alt="">' +
                             '</div>'+

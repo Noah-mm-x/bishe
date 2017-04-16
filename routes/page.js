@@ -19,6 +19,9 @@ router.get('/index', function(req, res) {
 router.get('/feel', function(req, res) {
     res.sendfile( './public/feel.html');
 });
+router.get('/feel/article', function(req, res) {
+    res.sendfile( './public/feelArticle.html');
+});
 router.get('/idea', function(req, res) {
     res.sendfile( './public/idea.html');
 });
@@ -96,7 +99,7 @@ router.post('/user/exit',function (req, res, next) {
         res.json({state: error.errno, message: error.code});
     })
 });
-//练习加入数据
+
 router.post('/idea/articles',function (req, res, next) {
    let conn = createConn();
    conn.connect1().then(result=>{
@@ -110,5 +113,20 @@ router.post('/idea/articles',function (req, res, next) {
    }).catch(function (error) {
        res.json({state: error.errno, message: error.code});
    })
+});
+
+router.post('/feel/articles',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1().then(result=>{
+        return conn.query1("SELECT * FROM `article` WHERE `id` = ?" ,[req.body.link]);
+    }).then(function (rows) {
+        if (rows.length){
+            var result = rows;
+            res.json({data: result,state:stateCode.OK, message: "ok"});
+            conn.end();
+        }
+    }).catch(function (error) {
+        res.json({state: error.errno, message: error.code});
+    })
 });
 module.exports = router;
