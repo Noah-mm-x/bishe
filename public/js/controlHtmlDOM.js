@@ -299,10 +299,12 @@ $(function () {
     // 梦感觉 文章详情页
     if ($('.feel-article').length){
         var linkSearch = window.location.search.replace('?',''),
+            articleLength = 25,
             articleTitle = $('.feel-article-content .title'),
             articleImage = $('.feel-article-content .image'),
             articleContent = $('.feel-article-content .content'),
             articleAuthor = $('.feel-article-content .author span');
+
        $.post('/page/feel/articles',{
            link:parseInt(linkSearch)
        }).done(function (datas) {
@@ -370,7 +372,32 @@ $(function () {
             }).fail(function (err) {
                 console.log(err);
             });
-        })
+        });
+        $('.pre-feel-article').on('click',function (e) {
+            e.preventDefault();
+            console.log(linkSearch);
+            if (linkSearch == 1) {
+                $('.pre-feel-article').hide();
+                return false;
+            }
+
+            window.location.href =
+                window.location.href.replace(
+                    window.location.search,'')+"?"+(parseInt(linkSearch)-1
+                )
+        });
+        $('.next-feel-article').on('click',function (e) {
+            e.preventDefault();
+            if (linkSearch == articleLength) {
+                $('.next-feel-article').hide();
+                return false;
+            }
+
+            window.location.href =
+                window.location.href.replace(
+                    window.location.search,'')+"?"+(parseInt(linkSearch)+1
+                )
+        });
     }
 
     //梦思想

@@ -209,15 +209,31 @@ main.feel{
     line-height: 28px;
 }
 .feel-article-content .author{
-    position: absolute;
-    right: 20px;
     border-bottom: 12px;
     font-size: 12px;
     color: #cdcfd8;
+    margin-left: 252px;
 }
 .feel-article-content .author > span{
     margin-left: 8px;
     color: #123456;
+}
+.feel-article-content .switch-article{
+    margin-top: 22px;
+}
+.feel-article-content .switch-article > a{
+    position: absolute;
+    left: 106px;
+    width: 60px;
+    height: 22px;
+    font-size: 14px;
+    color: #666;
+    background-color: #e4f2ff;
+    line-height: 22px;
+    text-align: center;
+}
+.feel-article-content .switch-article > a + a{
+    left: 226px;
 }
 .feel-article-comment{
     float: left;
