@@ -213,13 +213,19 @@ $(function () {
                 case 4:
                     swal('密码错误');
                     $password.val("");
+                    break;
                 case 5:
+                    swal('没有此用户');
+                    $password.val("");
+                    break;
                 case 6:
                     swal('用户名错误');
                     $account.val("");
                     $password.val("");
+                    break;
                 default:
                     swal('未知错误');
+                    console.log(data.state);
                     console.log(data.message);
                     break;
             }
