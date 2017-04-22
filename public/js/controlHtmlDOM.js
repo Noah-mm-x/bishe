@@ -233,6 +233,7 @@ $(function () {
             if (data.state == 11 ){
                 swal('退出成功');
                 storage.setItem('name','');
+                storage.setItem('pwd','');
                 $signInTemp.show();
                 $showUserInfo.hide();
             }else{
@@ -301,7 +302,6 @@ $(function () {
        }).done(function (datas) {
            if (datas.state == 1000) {
                var data = datas.data[0];
-               console.log(data);
                articleTitle.html(data.title);
                articleImage.attr('src','images/feel/'+data.image);
                articleContent.html(data.content);
@@ -309,7 +309,62 @@ $(function () {
            }
        }).fail(function (err) {
            console.log(err);
-       })
+       });
+       $.post('/page/feel/showComments',{
+           link:parseInt(linkSearch)
+       }).done(function (datas) {
+            if (datas.state == 1000) {
+                var items = datas.data;
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    comment = new createComment(item.name,item.content,item.date);
+                    commentList.append(comment);
+                }
+            }
+        }).fail(function (err) {
+            console.log(err);
+        });
+        var commentList = $('.feel-article-comment .user-comment-list'),
+            comment = '',
+            dateStr = '',
+            now = '',
+            year = '',
+            month = '',
+            day = '';
+        $('.submit-comment').on('click',function (e) {
+            e.preventDefault();
+            now = new Date();
+            year = now.getFullYear();
+            month = now.getMonth()+1;
+            day = now.getDate();
+            dateStr = year+'-'+month+'-'+day;
+            comment = $('.feel-article-comment .comment-box').val();
+            if (comment == '' || comment == null || comment == undefined){
+                swal('评论不能为空');
+                return false;
+            }
+            $.post('/page/feel/inputComments',{
+                aid:parseInt(linkSearch),
+                content:comment,
+                dateStr:dateStr
+            }).done(function (datas) {
+                console.log(datas.state);
+                switch (datas.state){
+                    case 12 :
+                        swal('未登录');
+                        break;
+                    case 1000:
+                        var commentContent = createComment(datas.data,comment,dateStr);
+                        commentList.append(commentContent);
+                        break;
+                    default:
+                        swal('评论失败');
+                        break;
+                }
+            }).fail(function (err) {
+                console.log(err);
+            });
+        })
     }
 
     //梦思想
@@ -495,6 +550,22 @@ $(function () {
                         '</a>'
                     ' </li>';
         return $(card);
+    }
+
+    function createComment(name,comment,date) {
+        var _name=getFirstWord(name);
+        var _html='<li class="clearfix">'+
+                        '<div class="user-info">'+
+                            '<div class="user-avatar">'+_name+'</div>'+
+                                '<div class="user-name ellipsis">'+name+'</div>'+
+                            '</div>'+
+                            '<div class="user-comment">'+
+                            '<p class="user-comment-detail">'+comment+'</p>'+
+                            '<p class="user-comment-date">'+date+'</p>'+
+                            '</div>'+
+                        '</div>'+
+                    '</li>';
+        return $(_html);
     }
     // 返回顶部
     function backToTop() {

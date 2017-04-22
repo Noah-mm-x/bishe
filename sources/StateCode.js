@@ -13,6 +13,7 @@ const StateCode = {
     LENGTH_IS_ZERO: 8,          //长度为0
     USER_IS_EXISTED : 9,        //用户已存在
     ALEADY_LOGIN:10,            //已经登录过
-    EXIT_LOGIN_SUCCESS:11       //退出成功
+    EXIT_LOGIN_SUCCESS:11,      //退出成功
+    NO_LOGIN:12                  //用户未登录
 };
 module.exports = StateCode;

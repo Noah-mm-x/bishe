@@ -32,7 +32,7 @@ app.use("/page/feel/js", express.static( './public/js'));
 app.use("/page/feel/images",  express.static( './public/images'));
 app.use("/page/feel/lib",  express.static( './public/lib'));
 
-app.use(session({secret: "mengfanxu", resave: false, saveUninitialized: false}));
+app.use(session({secret: "mengfanxu", resave: true, saveUninitialized: false}));
 
 app.use('/', index);
 app.use('/users', users);
