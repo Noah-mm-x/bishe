@@ -42,14 +42,13 @@ function checkUserAndPassword(req, res, next) {
 }
 
 // 判断用户是否登录
-function checkUserIsLogin(req, res, next) {
-    sessionData = req.session;
-    if (sessionData.currentUserId == '' || sessionData.currentUserId == null
-        || sessionData.currentUserId == undefined){
-        res.json({state:stateCode.NO_LOGIN, message: "user not login"});
-    }
-    next();
-}
+// function checkUserIsLogin(req, res, next) {
+//     var sessionDataId = req.body.id;
+//     if (sessionDataId == '' || sessionDataId == null || sessionDataId == undefined){
+//         res.json({state:stateCode.NO_LOGIN, message: "user not login"});
+//     }
+//     next();
+// }
 
 //注册接口
 router.post("/user/register", checkUserAndPassword)
@@ -86,11 +85,11 @@ router.post("/user/login", checkUserAndPassword)
             if (rows.length) {
                 var result = rows[0];
                 if (md5(req.body.pwd) == result.pwd) {
-                    req.session.currentUserId = result.id;
-                    req.session.currentUserName = result.name;
-                    req.session.currentUserPwd = result.pwd;
-                    sessionData = req.session;
-                    res.json({state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
+                    // req.session.currentUserId = result.id;
+                    // req.session.currentUserName = result.name;
+                    // req.session.currentUserPwd = result.pwd;
+                    // sessionData = req.session;
+                    res.json({data:result,state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
                 } else {
                     res.json({state: stateCode.PASSWORD_WRONG, message: "password wrong"});
                 }
@@ -107,10 +106,10 @@ router.post("/user/login", checkUserAndPassword)
 router.post('/user/exit',function (req, res, next) {
     let conn = createConn();
     conn.connect1().then(result=>{
-        req.session.currentUserId = null;
-        req.session.currentUserName = null;
-        req.session.currentUserPwd = null;
-        sessionData = req.session;
+        // req.session.currentUserId = null;
+        // req.session.currentUserName = null;
+        // req.session.currentUserPwd = null;
+        // sessionData = req.session;
     }).then(result => {
         res.json({state: stateCode.EXIT_LOGIN_SUCCESS, message: "OK"});
         conn.end();
@@ -152,22 +151,20 @@ router.post('/feel/articles',function (req, res, next) {
 });
 
 // 梦感觉 输入评论接口
-router.post('/feel/inputComments',checkUserIsLogin)
-    .post('/feel/inputComments',function (req, res, next) {
+router.post('/feel/inputComments',function (req, res, next) {
    let conn = createConn();
    conn.connect1()
        .then(result=>{
-           if (req.session) sessionData = req.session;
-           if (sessionData.currentUserId == '' || sessionData.currentUserId == null
-               || sessionData.currentUserId == undefined){
+           if (req.body.id) sessionData = req.body.id;
+           if (sessionData == '' || sessionData == null || sessionData == undefined){
                res.json({state:stateCode.NO_LOGIN, message: "user not login"});
            }
        }).then(result=>{
            return conn.query1("INSERT INTO `feel_comment` (`aid`,`uid`,`content`,`date`)" +
                " VALUES(?,?,?,?)",
-               [req.body.aid,sessionData.currentUserId,req.body.content, req.body.dateStr]);
+               [req.body.aid,sessionData,req.body.content, req.body.dateStr]);
        }).then(result=>{
-           res.json({data: req.session.currentUserName,state:stateCode.OK, message: "ok"});
+           res.json({state:stateCode.OK, message: "ok"});
            conn.end();
         }).catch(function (error) {
        res.json({state: error.errno, message: error.code});

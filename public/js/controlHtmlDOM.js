@@ -63,8 +63,8 @@ $(function () {
             showInfo('用户名长度不能超过12位');
             return false;
         }
-        if (_self.val().length < 6) {
-            showInfo('用户名不能少于6位');
+        if (_self.val().length < 3) {
+            showInfo('用户名不能少于3位');
             return false;
         }
 
@@ -93,7 +93,7 @@ $(function () {
         }
 
         if (_self.val().length < 8 || _self.val().length > 15) {
-            showInfo('用户名长度为8到15位');
+            showInfo('密码长度为8到15位');
             return false;
         } else {
             flag3 = true;
@@ -201,6 +201,7 @@ $(function () {
                         confirmButtonText: '确定'
                     }, function (isConfirm) {
                         if (isConfirm) {
+                            storage.setItem('id', data.data.id);
                             storage.setItem('name', $account.val());
                             storage.setItem('pwd', md5($password.val()));
                             $userName.html($account.val());
@@ -238,8 +239,11 @@ $(function () {
         $.post('/page/user/exit').done(function (data) {
             if (data.state == 11 ){
                 swal('退出成功');
+                storage.setItem('id','');
                 storage.setItem('name','');
                 storage.setItem('pwd','');
+                $account.html();
+                $password.html();
                 $signInTemp.show();
                 $showUserInfo.hide();
             }else{
@@ -255,6 +259,8 @@ $(function () {
         $avatar.html(getFirstWord(storage.getItem('name')));
         $signInTemp.hide();
         $showUserInfo.show();
+        // $account.val(storage.getItem('name'));
+        // $password.val(storage.getItem('pwd'));
     }
 
     //梦感觉  分页
@@ -352,6 +358,7 @@ $(function () {
                 return false;
             }
             $.post('/page/feel/inputComments',{
+                id:storage.getItem('id'),
                 aid:parseInt(linkSearch),
                 content:comment,
                 dateStr:dateStr
@@ -362,7 +369,7 @@ $(function () {
                         swal('未登录');
                         break;
                     case 1000:
-                        var commentContent = createComment(datas.data,comment,dateStr);
+                        var commentContent = createComment(storage.getItem('name'),comment,dateStr);
                         commentList.append(commentContent);
                         break;
                     default:
