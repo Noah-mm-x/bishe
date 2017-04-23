@@ -147,6 +147,17 @@ $(function () {
                         $registerAccount.val('');
                         $registerPassword.val('');
                         $registerConfirmPassword.val('');
+
+                        // 注册成功存入 storage
+                        storage.setItem('id', data.data.id);
+                        storage.setItem('name', data.data.name);
+                        storage.setItem('pwd', data.data.pwd);
+
+                        // 注册成功 自动登录
+                        $userName.html(storage.getItem('name'));
+                        $avatar.html(getFirstWord(storage.getItem('name')));
+                        $signInTemp.hide();
+                        $showUserInfo.show();
                     });
                     break;
                 case 9:

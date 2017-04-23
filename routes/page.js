@@ -68,7 +68,13 @@ router.post("/user/register", checkUserAndPassword)
             return conn.query1("INSERT INTO `user` (`name`,`pwd`) VALUES(?,?)",
                 [req.body.name, md5(req.body.pwd)]);
         }).then(result => {
-            res.json({state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
+            return conn.query1("SELECT * FROM `user` WHERE `name`=?",
+                [req.body.name]);
+        }).then(rows=> {
+            if (rows.length) {
+                var result = rows[0];
+                res.json({data:result,state: stateCode.ALLOW_LOGIN_OR_REGISTER, message: "OK"});
+            }
             conn.end();
         }).catch(error => {
             res.json({state: error.errno, message: error.code});
