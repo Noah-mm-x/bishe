@@ -316,7 +316,7 @@ $(function () {
     // 梦感觉 文章详情页
     if ($('.feel-article').length){
         var linkSearch = window.location.search.replace('?',''),
-            articleLength = 25,
+            articleLength = 50,
             articleTitle = $('.feel-article-content .title'),
             articleImage = $('.feel-article-content .image'),
             articleContent = $('.feel-article-content .content'),
@@ -393,7 +393,6 @@ $(function () {
         });
         $('.pre-feel-article').on('click',function (e) {
             e.preventDefault();
-            console.log(linkSearch);
             if (linkSearch == 1) {
                 $('.pre-feel-article').hide();
                 return false;
@@ -420,6 +419,11 @@ $(function () {
 
     //梦思想
     if ($('.idea').length) {
+        //点击切换标签
+        $('.btn-switch').on('click',function () {
+           window.location.reload();
+        });
+
         // 推荐标签背景色 #fcc #cfc #ccf #ffc #fcf #cff
 
         /*
