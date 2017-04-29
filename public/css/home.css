@@ -40,7 +40,11 @@
 .image-switch .pre-image ul li:hover {
     background-color: #f1f1f1;
 }
-
+.image-switch .pre-image ul li > a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 .image-switch .pre-image ul li a .img-content:hover {
     color: #2d8ec8;
 }
@@ -97,7 +101,11 @@
     border-bottom: 1px solid #e4e4e4;
     padding-bottom: 20px;
 }
-
+.list-article ul li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 .list-article ul li a img {
     width: 167px;
     height: 130px;
