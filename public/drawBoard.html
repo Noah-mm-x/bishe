@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦感觉</title>
+	<link rel="stylesheet" href="lib/animate.min.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/other.css">
+	<link rel="stylesheet" href="lib/sweet-alert.css">
+	<link rel="stylesheet" href="css/drawBoard.css">
+	<!--[if IE]>
+	<script src="lib/html5.js"></script>
+	<![endif]-->
+	<script src="lib/jquery-3.1.0.js"></script>
+	<script src="lib/md5.min.js"></script>
+	<script src="lib/sweet-alert.js"></script>
+	<script src="lib/vue.min.js"></script>
+</head>
+<body>
+<header>
+	<div class="logo"><a href="/page/index"><img src="images/logo.png" alt="晨星梦语"></a></div>
+	<div class="nav">
+		<ul>
+			<li><a href="/page/index">首页</a></li>
+			<li><a href="/page/feel">梦感觉</a></li>
+			<li><a href="index.html">梦探索</a></li>
+			<li><a href="/page/idea">梦思想</a></li>
+			<li><a href="/page/drawBoard">梦画板</a></li>
+		</ul>
+	</div>
+</header>
+<main class="drawBoard">
+	<div id="drawing-board-page">
+		<div class="header">
+			<div class="current-tool">
+				<i :class="currentTool"></i>
+				<input type="hidden" name="currentTool" v-model="currentToolNum">
+			</div>
+			<ul class="tool-info clearfix">
+				<li class="lineWidth">
+					<p>线条宽度:</p>
+					<input type="number" name="lineWidth" v-model="lineWidth" v-on:input="bindLineWidth($event)">
+				</li>
+				<li class="color">
+					<p>笔触颜色:</p>
+					<div class="color-box">
+						<div class="color-value"
+							 data-type="1"
+							 :style="{backgroundColor: '#'+pageLineColor}"
+							 @click="clickPopupColorShow($event)"
+							 v-cloak></div>
+					</div>
+				</li>
+				<li class="color">
+					<p>填充颜色:</p>
+					<div class="color-box">
+						<div class="color-value"
+							 data-type="2"
+							 :style="{backgroundColor: '#'+pageFillColor}"
+							 @click="clickPopupColorShow($event)"
+							 v-cloak></div>
+					</div>
+				</li>
+				<!--<li class="alpha">
+					<p>透明度:</p>
+					<div class="select-alpha-box">
+						<input type="text" name="alpha" v-model="currentAlpha" v-on:input="bindAlpha($event)">
+						<div class="select-alpha"
+							 @click="clickSelectAlphaSliderShow()"
+						>
+							<div class="slash leftSlash"></div>
+							<div class="slash rightSlash"></div>
+						</div>
+					</div>
+					<div class="select-alpha-slider"
+						 v-if="selectAlphaSliderShow"
+						 v-cloak
+					>
+						<div class="slider-axis">
+							<div class="slider-axis-triangle"
+								 :style="{left:sliderAlpha+'px'}"
+								 @mousedown="sliderMove($event)"
+							></div>
+						</div>
+					</div>
+				</li>-->
+			</ul>
+			<div class="downloadImage" @click="downloadImage()">点击下载</div>
+			<div class="clearScreen" @click="clearScreen()">一键清屏</div>
+		</div>
+		<main class="clearfix">
+			<ul class="tools clearfix">
+				<li v-for="(tool,index) in tools"
+					:data-tool="tool.dataTool"
+					:class="{'active':index==selectedToolIndex}">
+					<i :class="tool.toolClass"
+					   @click="selectTool(tool,index)"
+					>
+					</i>
+				</li>
+			</ul>
+			<input id="select-tool" type="hidden" value="1">
+			<canvas id="drawing-board" width="862" height="400" @mousedown="painting($event)"></canvas>
+		</main>
+		<!--公用透明背景遮罩，作用：防止其他元素相应事件-->
+		<div class="tr-bk" v-show="trBk" v-cloak></div>
+		<!--T 输入框-->
+		<input type="text"
+			   name="inputText"
+			   v-model="inputTextValue"
+			   :style="{
+		   		left:inputTextPosition.x+'px',
+		   		top:inputTextPosition.y+'px',
+		   		height:lineWidth < 12 ? 12+'px':lineWidth+'px',
+		   		fontSize:lineWidth < 12 ? 12+'px':lineWidth+'px',
+		   		color:'#'+pageLineColor
+		   }"
+			   v-show="inputTextShow"
+			   @click="bindInputText($event)"
+			   v-cloak
+		>
+		<!-- 临时矩形 -->
+		<div class="tempRect"
+			 :style="{
+		 	 width:rectTempAttr.width+'px',
+		 	 height:rectTempAttr.height+'px',
+		 	 left:rectTempAttr.left+'px',
+		 	 top:rectTempAttr.top+'px',
+		 	 borderWidth:rectTempAttr.borderWidth+'px',
+		 	 borderStyle:rectTempAttr.borderStyle,
+		 	 borderColor:'#'+rectTempAttr.borderColor,
+		 	 backgroundColor:'#'+rectTempAttr.backgroundColor,
+		 }"
+			 v-show="rectTempPositionShow"
+			 v-cloak
+		></div>
+		<!--临时圆形-->
+		<div class="tempRound"
+			 :style="{
+			 width:roundTempAttr.r+'px',
+		 	 height:roundTempAttr.r+'px',
+		 	 left:roundTempAttr.left+'px',
+		 	 top:roundTempAttr.top+'px',
+		 	 borderWidth:roundTempAttr.borderWidth+'px',
+		 	 borderStyle:roundTempAttr.borderStyle,
+		 	 borderColor:'#'+roundTempAttr.borderColor,
+		 	 backgroundColor:'#'+roundTempAttr.backgroundColor,
+		 }"
+			 v-show="roundTempPositionShow"
+			 v-cloak
+		></div>
+		<div class="popup-color"
+			 :style="{left:popupColorPosition.x+'px',top:popupColorPosition.y+'px'}"
+			 v-show="popupColorShow"
+			 v-cloak
+		>
+			<div class="title" @mousedown="dragPopupColor($event)">颜色选择器</div>
+			<div class="content">
+				<div class="left">
+					<ul class="alternative-color">
+						<li v-for="color in colors"
+							:style="{backgroundColor: color}"
+							@click="selectColor($event)"
+						>
+						</li>
+					</ul>
+				</div>
+				<div class="divider"></div>
+				<div class="right">
+					<div class="color-show-box clearfix">
+						<div class="color-show">
+							新的
+							<div class="color-contrast">
+								<div class="new-color" :style="{backgroundColor:'#'+newColor}"></div>
+								<div class="current-color" :style="{backgroundColor:'#'+pageColor}"></div>
+							</div>
+							当前
+						</div>
+						<div class="color-show-btns">
+							<a href="javascript:;" class="confirm" @click="colorConfirm()">确定</a>
+							<a href="javascript:;" class="cancel" @click="colorCancel()">取消</a>
+						</div>
+					</div>
+					<div class="color-setting clearfix">
+						<div class="rgb-color clearfix">
+							<ul>
+								<li class="clearfix">
+									<p>R:</p>
+									<input type="text" name="R-color" maxlength="3" v-model="RColor"
+										   v-on:input="bindRColor($event)">
+								</li>
+								<li class="clearfix">
+									<p>G:</p>
+									<input type="text" name="G-color" maxlength="3" v-model="GColor"
+										   v-on:input="bindGColor($event)">
+								</li>
+								<li class="clearfix">
+									<p>B:</p>
+									<input type="text" name="B-color" maxlength="3" v-model="BColor"
+										   v-on:input="bindBColor($event)">
+								</li>
+							</ul>
+						</div>
+						<div class="hex-color clearfix">
+							<p>16进制值：</p>
+							<div class="hex-color-setting">
+								<p>#</p>
+								<input type="text"
+									   name="hex-color"
+									   v-model="newColor"
+									   maxlength="6"
+									   v-on:input="bindHex($event)"
+								></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<footer>
+	<div class="container footer-top">
+		<ul class="footer-link">
+			<li><a href="#">关于晨梦</a></li>
+			<li><a href="#">梦感觉</a></li>
+			<li><a href="#">梦探索</a></li>
+			<li><a href="#">梦思想</a></li>
+			<li><a href="#">小集体</a></li>
+		</ul>
+		<ul class="footer-link">
+			<li><a href="#">关于我</a></li>
+			<li><a href="#">晨梦在成长</a></li>
+			<li><a href="#">联系方式</a></li>
+		</ul>
+		<ul class="footer-link">
+			<li><a href="#">更多</a></li>
+			<li><a href="#">使用帮助</a></li>
+			<li><a href="#">服务条款</a></li>
+		</ul>
+		<div class="qrcode">
+			<p class="animated infinite ani swing">扫我！扫我！扫我</p>
+			<img src="../images/qrcode.png" alt="">
+		</div>
+	</div>
+	<div class="container footer-bottom">
+		<p>关注晨梦</p>
+		<i class="fenxiang-icon fenxiang-xinlang"></i>
+		<i class="fenxiang-icon fenxiang-baidu"></i>
+	</div>
+</footer>
+<script src="js/controlHtmlDOM.js"></script>
+<script src="js/drawBoard.js"></script>
+</body>
+</html>

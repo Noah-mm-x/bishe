@@ -26,6 +26,9 @@ router.get('/feel/article', function(req, res) {
 router.get('/idea', function(req, res) {
     res.sendfile( './public/idea.html');
 });
+router.get('/drawBoard', function(req, res) {
+    res.sendfile( './public/drawBoard.html');
+});
 
 
 //判断是否有用户名和密码

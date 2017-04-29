@@ -26,6 +26,7 @@ app.use("/page/css",  express.static('./public/css'));
 app.use("/page/js", express.static( './public/js'));
 app.use("/page/images",  express.static( './public/images'));
 app.use("/page/lib",  express.static( './public/lib'));
+app.use("/page/font",  express.static( './public/font'));
 
 app.use("/page/feel/css",  express.static('./public/css'));
 app.use("/page/feel/js", express.static( './public/js'));
