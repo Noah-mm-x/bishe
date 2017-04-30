@@ -23,6 +23,9 @@ router.get('/feel', function(req, res) {
 router.get('/feel/article', function(req, res) {
     res.sendfile( './public/feelArticle.html');
 });
+router.get('/explore', function(req, res) {
+    res.sendfile( './public/explore.html');
+});
 router.get('/idea', function(req, res) {
     res.sendfile( './public/idea.html');
 });

@@ -490,4 +490,114 @@ main.idea .btn-switch{
 .anticlockwise-down-animate {
     -webkit-animation: anticlockwiseDown .5s 1 forwards ease-in;
 }
+/*梦探索*/
+main.explore {
+    margin-top: 55px;
+}
+.explore > .title{
+    width: 100%;
+    height: 98px;
+    background-color: #fafafa;
+    text-align: center;
+    font-size: 48px;
+    color: #3171b8;
+    line-height: 98px;
+}
+.explore .content-list{
+    float: left;
+    width: 640px;
+}
+.explore .content-list li{
+    width: 100%;
+    height: 190px;
+    border-bottom: 1px solid #ededed;
+}
+.explore .content-list li > a.list-left{
+    float: left;
+    display: block;
+    width: 226px;
+    height: 150px;
+}
+.explore .content-list li > a.list-left > img{
+    display: block;
+    margin-top: 20px;
+    width: 226px;
+    height: 150px;
+}
 
+.explore .content-list li .list-right{
+    float: left;
+    margin-left: 20px;
+    width: 370px;
+    height: 100%;
+}
+
+.explore .content-list li .list-right a{
+    display: block;
+    font-size: 18px;
+    color: #305798;
+    margin-top: 24px;
+}
+.explore .content-list li .list-right a:hover{
+    text-decoration: underline;
+    color: #820c0c;
+}
+.explore .content-list li .list-right p.summary{
+    margin-top: 14px;
+    font-size: 14px;
+    color: #393939;
+    text-indent: 2em;
+    line-height: 24px;
+}
+.explore .content-list li .list-right p.date{
+    margin-left: 240px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #666666;
+}
+.explore .content-recommend{
+    float: right;
+    width: 334px;
+}
+.explore .content-recommend .title{
+    width: 100%;
+    font-size: 20px;
+    color: #305798;
+    margin-top: 16px;
+    border-bottom: 1px solid #7a7a7a;
+}
+.explore .content-recommend  .content{
+    margin-top: 20px;
+}
+.explore .content-recommend  .content li{
+    width: 164px;
+    margin-bottom: 34px;
+}
+.explore .content-recommend  .content li:nth-child(odd){
+    float: left;
+}
+.explore .content-recommend  .content li:nth-child(even){
+    float: right;
+}
+.explore .content-recommend  .content li  a.img-link{
+    display: block;
+    width: 164px;
+    height: 108px;
+}
+.explore .content-recommend  .content li a.img-link > img{
+    display: block;
+    width: 164px;
+    height: 108px;
+}
+.explore .content-recommend  .content li  a.info{
+    display: block;
+    width: 164px;
+    font-size: 12px;
+    color: #333333;
+    margin: 8px auto;
+    text-align: center;
+}
+.explore .M-box{
+    position: static;
+    margin-top: 20px;
+}

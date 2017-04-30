@@ -340,7 +340,7 @@ $(function () {
                         case '4':
                             if (!moving) return false;
 
-                            _self.rectTempAttr.width = e.pageX - _self.rectTempAttr.left;
+                            _self.rectTempAttr.width = e.pageX  - _self.rectTempAttr.left;
                             _self.rectTempAttr.height = e.pageY - _self.rectTempAttr.top;
                             wTemp = e.pageX - _self.rectTempAttr.left;
                             hTemp = e.pageY - _self.rectTempAttr.top;

@@ -417,6 +417,44 @@ $(function () {
         });
     }
 
+    //梦探索
+    if ($('.explore').length){
+        var exploreBox = $('.explore .content-list'),
+            maxPageNum = 8;        //每页最大卡片个数
+        // return false;
+        $.getJSON('../data/explore.json', function (data) {
+            var item   = data.articles,
+                length = Math.ceil(data.articles.length/maxPageNum),
+                pageIndex;
+            //默认页面显示内容
+            for (var i = 0; i < maxPageNum; i++) {
+                exploreBox.append(new exploreCard(item[i].image,item[i].title,item[i].content,
+                    item[i].date,item[i].link));
+            }
+            $(".M-box").pagination({
+                pageCount: length,
+                jump: true,
+                coping: true,
+                homePage: '首页',
+                endPage: '末页',
+                preContent: '上页',
+                nextContent: '下页',
+                callback: function (index) {
+                    pageIndex = index.getCurrent() - 1;
+                    exploreBox.empty();
+                    for (var i = 0; i < maxPageNum; i++) {
+                        var j = maxPageNum * pageIndex + i;
+                        if (item[j]) {
+                            exploreBox.append(new exploreCard(item[j].image,item[j].title,item[j].content,
+                                item[j].date,item[j].link));
+                        }
+                    }
+                    backToTop();
+                }
+            })
+        });
+    }
+
     //梦思想
     if ($('.idea').length) {
         //点击切换标签
@@ -602,7 +640,7 @@ $(function () {
                                         '<p class="date">发布于：<span>'+authorDate+'</span></p>' +
                                     '</div>' +
                             '</div>' +
-                        '</a>'
+                        '</a>'+
                     ' </li>';
         return $(card);
     }
@@ -621,6 +659,20 @@ $(function () {
                         '</div>'+
                     '</li>';
         return $(_html);
+    }
+
+    function exploreCard(image,title,content,date,link) {
+        var card = '<li class="clearfix">'+
+                        '<a href=explore/article?'+link+ ' class="list-left">'+
+                             '<img src=images/explore/'+image+' alt="">'+
+                        '</a>'+
+                        '<div class="list-right">'+
+                            '<a href=explore/article?'+link+ '>'+title+'</a>'+
+                            '<p class="summary">'+content+'</p>'+
+                            '<p class="date">发表日期 '+date+'</p>'+
+                        '</div>'+
+                    '</li>';
+        return $(card);
     }
     // 返回顶部
     function backToTop() {
