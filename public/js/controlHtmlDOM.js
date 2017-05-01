@@ -676,7 +676,7 @@ $(function () {
 
     function feelCard(image, title, content, authorAvatar, authorName, authorDate,link) {
         var card = '<li>' +
-                        '<a  href=feel/article?'+link+'>'+
+                        '<a target="_blank"  href=feel/article?'+link+'>'+
                             '<div class="card-img-box">' +
                                 '<img class="img" src="images/feel/'+image+'" alt="">' +
                             '</div>'+
@@ -712,11 +712,11 @@ $(function () {
 
     function exploreCard(image,title,content,date,link) {
         var card = '<li class="clearfix">'+
-                        '<a href=explore/article?'+link+ ' class="list-left">'+
+                        '<a target="_blank" href=explore/article?'+link+ ' class="list-left">'+
                              '<img src=images/explore/'+image+' alt="">'+
                         '</a>'+
                         '<div class="list-right">'+
-                            '<a href=explore/article?'+link+ '>'+title+'</a>'+
+                            '<a target="_blank" href=explore/article?'+link+ '>'+title+'</a>'+
                             '<p class="summary">'+content+'</p>'+
                             '<p class="date">发表日期 '+date+'</p>'+
                         '</div>'+
