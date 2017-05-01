@@ -455,6 +455,52 @@ $(function () {
         });
     }
 
+    // 梦感觉 文章详情页
+    if ($('.explore-article').length){
+        var linkSearch = window.location.search.replace('?',''),
+            articleLength = 50,
+            articleTitle = $('.explore-article .content-details > .title'),
+            articleDate = $('.explore-article .content-details > .date'),
+            articleContent = $('.explore-article .content-details > .content');
+
+        $.post('/page/explore/articles',{
+            link:parseInt(linkSearch)
+        }).done(function (datas) {
+            if (datas.state == 1000) {
+                var data = datas.data[0];
+                articleTitle.html(data.title);
+                articleDate.html(data.date);
+                articleContent.html(data.content);
+            }
+        }).fail(function (err) {
+            console.log(err);
+        });
+        $('.pre-feel-article').on('click',function (e) {
+            e.preventDefault();
+            if (linkSearch == 1) {
+                $('.pre-feel-article').hide();
+                return false;
+            }
+
+            window.location.href =
+                window.location.href.replace(
+                    window.location.search,'')+"?"+(parseInt(linkSearch)-1
+                )
+        });
+        $('.next-feel-article').on('click',function (e) {
+            e.preventDefault();
+            if (linkSearch == articleLength) {
+                $('.next-feel-article').hide();
+                return false;
+            }
+
+            window.location.href =
+                window.location.href.replace(
+                    window.location.search,'')+"?"+(parseInt(linkSearch)+1
+                )
+        });
+    }
+
     //梦思想
     if ($('.idea').length) {
         //点击切换标签

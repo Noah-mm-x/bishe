@@ -26,6 +26,9 @@ router.get('/feel/article', function(req, res) {
 router.get('/explore', function(req, res) {
     res.sendfile( './public/explore.html');
 });
+router.get('/explore/article', function(req, res) {
+    res.sendfile( './public/exploreArticle.html');
+});
 router.get('/idea', function(req, res) {
     res.sendfile( './public/idea.html');
 });
@@ -200,4 +203,19 @@ router.post('/feel/showComments',function (req, res, next) {
     })
 });
 
+// 梦探索 文章详情接口
+router.post('/explore/articles',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1().then(result=>{
+        return conn.query1("SELECT * FROM `explore_article` WHERE `id` = ?" ,[req.body.link]);
+    }).then(function (rows) {
+        if (rows.length){
+            var result = rows;
+            res.json({data: result,state:stateCode.OK, message: "ok"});
+            conn.end();
+        }
+    }).catch(function (error) {
+        res.json({state: error.errno, message: error.code});
+    })
+});
 module.exports = router;

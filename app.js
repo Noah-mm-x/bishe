@@ -33,6 +33,11 @@ app.use("/page/feel/js", express.static( './public/js'));
 app.use("/page/feel/images",  express.static( './public/images'));
 app.use("/page/feel/lib",  express.static( './public/lib'));
 
+app.use("/page/explore/css",  express.static('./public/css'));
+app.use("/page/explore/js", express.static( './public/js'));
+app.use("/page/explore/images",  express.static( './public/images'));
+app.use("/page/explore/lib",  express.static( './public/lib'));
+
 app.use(session({secret: "mengfanxu", resave: true, saveUninitialized: false}));
 
 app.use('/', index);
