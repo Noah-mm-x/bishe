@@ -525,3 +525,9 @@ footer .footer-bottom i {
     box-shadow: 0 4px 5px #f9f9f9;
 }
 
+/*返回顶部按钮*/
+.backToTop{
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}

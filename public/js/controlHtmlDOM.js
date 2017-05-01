@@ -668,8 +668,11 @@ $(function () {
         });
     }
 
-
-
+    //返回顶部
+    $('.backToTop').on('click',function (e) {
+        e.preventDefault();
+       backToTop();
+    });
 
     function feelCard(image, title, content, authorAvatar, authorName, authorDate,link) {
         var card = '<li>' +
