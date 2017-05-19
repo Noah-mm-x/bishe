@@ -668,6 +668,108 @@ $(function () {
         });
     }
 
+    //后台管理
+    if ($('.back-stage').length){
+    //    切换选择
+        $('.side li').on('click',function (e) {
+            e.preventDefault();
+            var _self = $(this);
+            var son = _self.data('son');
+            _self.addClass('active').siblings().removeClass('active');
+            $('#'+son).show().siblings().hide();
+        })
+
+    //    梦感觉
+        $('#feel-submit').on('click',function () {
+           var title = $('#feel-title').val();
+           var image = $('#feel-image').val();
+           var content = $('#feel-content').val();
+           var author = $('#feel-author').val();
+           if (title==null || title==''||title==undefined){
+               swal('标题不能为空');
+               return false;
+           }
+            if (image==null || image==''||image==undefined){
+                swal('图片不能为空');
+                return false;
+            }
+            if (content==null || content==''||content==undefined){
+                swal('内容不能为空');
+                return false;
+            }
+            if (author==null || author==''||author==undefined){
+                swal('作者不能为空');
+                return false;
+            }
+            $.post('/page/backFeel',{
+                title:title,
+                image:image,
+                content:content,
+                author:author
+            }).done(function (datas) {
+                if (datas.state == 1000) {
+                    swal('输入成功');
+                }
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+    //    梦思想
+        $('#idea-submit').on('click',function () {
+            var content = $('#idea-content').val();
+            var author = $('#idea-author').val();
+
+            if (content==null || content==''||content==undefined){
+                swal('内容不能为空');
+                return false;
+            }
+            if (author==null || author==''||author==undefined){
+                swal('作者不能为空');
+                return false;
+            }
+            $.post('/page/backIdea',{
+                content:content,
+                author:author
+            }).done(function (datas) {
+                if (datas.state == 1000) {
+                    swal('输入成功');
+                }
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+    //    梦探索
+        $('#explore-submit').on('click',function () {
+            var now = new Date();
+            var title = $('#explore-title').val();
+            var date = now.getFullYear()+'-'+formateNum((now.getMonth()+1))+'-'+formateNum(now.getDay());
+            var content = $('#explore-content').val();
+            if (title==null || title==''||title==undefined){
+                swal('标题不能为空');
+                return false;
+            }
+
+            if (content==null || content==''||content==undefined){
+                swal('内容不能为空');
+                return false;
+            }
+
+            $.post('/page/backExplore',{
+                title:title,
+                date:date,
+                content:content
+            }).done(function (datas) {
+                if (datas.state == 1000) {
+                    swal('输入成功');
+                }else {
+                    console.log(datas.state);
+                }
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+    }
+
     //返回顶部
     $('.backToTop').on('click',function (e) {
         e.preventDefault();
@@ -759,5 +861,10 @@ $(function () {
             flag = ~~tempArr.length;
         }while (flag);
         return len > max ? resultArr.splice(len-max,num) : 0;
+    }
+
+//    格式化时间
+    function formateNum(num) {
+        return num >=10 ? num : '0'+num;
     }
 });

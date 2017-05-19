@@ -35,6 +35,9 @@ router.get('/idea', function(req, res) {
 router.get('/drawBoard', function(req, res) {
     res.sendfile( './public/drawBoard.html');
 });
+router.get('/backStage', function(req, res) {
+    res.sendfile( './public/backStage.html');
+});
 
 
 //判断是否有用户名和密码
@@ -214,6 +217,52 @@ router.post('/explore/articles',function (req, res, next) {
             res.json({data: result,state:stateCode.OK, message: "ok"});
             conn.end();
         }
+    }).catch(function (error) {
+        res.json({state: error.errno, message: error.code});
+    })
+});
+
+//梦感觉后台接口
+router.post('/backFeel',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1()
+        .then(result=>{
+        return conn.query1("INSERT INTO `feel_article` (`title`,`image`,`content`,`author`)" +
+            " VALUES(?,?,?,?)",
+            [req.body.title,req.body.image, req.body.content,req.body.author]);
+    }).then(result=>{
+        res.json({state:stateCode.OK, message: "ok"});
+        conn.end();
+    }).catch(function (error) {
+        res.json({state: error.errno, message: error.code});
+    })
+});
+//梦思想后台接口
+router.post('/backIdea',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1()
+        .then(result=>{
+            return conn.query1("INSERT INTO `idea_article` (`content`,`author`)" +
+                " VALUES(?,?)",
+                [ req.body.content,req.body.author]);
+        }).then(result=>{
+        res.json({state:stateCode.OK, message: "ok"});
+        conn.end();
+    }).catch(function (error) {
+        res.json({state: error.errno, message: error.code});
+    })
+});
+//梦探索后台接口
+router.post('/backExplore',function (req, res, next) {
+    let conn = createConn();
+    conn.connect1()
+        .then(result=>{
+            return conn.query1("INSERT INTO `explore_article` (`title`,`date`,`content`)" +
+                " VALUES(?,?,?)",
+                [req.body.title,req.body.date, req.body.content]);
+        }).then(result=>{
+        res.json({state:stateCode.OK, message: "ok"});
+        conn.end();
     }).catch(function (error) {
         res.json({state: error.errno, message: error.code});
     })

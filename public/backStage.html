@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理</title>
+	<link rel="stylesheet" href="css/other.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="lib/sweet-alert.css">
+	<!--[if IE]>
+	<script src="lib/html5.js"></script>
+	<![endif]-->
+	<script src="lib/jquery-3.1.0.js"></script>
+	<!--<script src="lib/swiper-3.4.1.jquery.min.js"></script>-->
+	<script src="lib/sweet-alert.js"></script>
+</head>
+<body>
+<div class="back-stage clearfix">
+	<div class="title">后台管理系统</div>
+	<div class="back-container clearfix">
+		<ul class="side">
+			<li data-son="feel" class="active"><a href="javascript:;" >梦感觉</a></li>
+			<li data-son="idea"><a href="javascript:;">梦思想</a></li>
+			<li data-son="explore"><a href="javascript:;">梦探索</a></li>
+		</ul>
+		<div class="back-main">
+			<div id="feel">
+				<p>标题:</p>
+				<br/>
+				<input type="text" id="feel-title">
+				<p>图片：</p>
+				<br/>
+				<input type="text" id="feel-image">
+				<p>内容:</p>
+				<br/>
+				<textarea id="feel-content"></textarea>
+				<p>作者：</p>
+				<br/>
+				<input type="text" id="feel-author">
+				<button id="feel-submit">提交</button>
+			</div>
+			<div id="idea">
+				<p>内容:</p>
+				<br/>
+				<textarea id="idea-content"></textarea>
+				<p>作者：</p>
+				<br/>
+				<input type="text" id="idea-author">
+				<button id="idea-submit">提交</button>
+			</div>
+			<div id="explore">
+				<p>标题:</p>
+				<br/>
+				<input type="text" id="explore-title">
+				<br/>
+				<input  style="display: none;" type="text" id="explore-time" readonly>
+				<p>内容:</p>
+				<br/>
+				<textarea type="text" id="explore-content"></textarea>
+				<button id="explore-submit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/controlHtmlDOM.js"></script>
+</body>
+</html>

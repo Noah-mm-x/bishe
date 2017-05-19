@@ -718,3 +718,82 @@ main.explore-article {
     text-decoration: underline;
     color: #820c0c;
 }
+
+/*后台管理*/
+.back-stage{
+    margin: 0 auto;
+    width: 1036px;
+    overflow: hidden;
+}
+
+.back-stage .title{
+    width: 100%;
+    height: 82px;
+    background-color: #abcdef;
+    text-align: center;
+    line-height: 82px;
+    font-size: 48px;
+    color: #2b292b;
+}
+
+.back-stage .side{
+    float: left;
+    width: 236px;
+    background-color: coral;
+}
+
+.back-stage .side li{
+    line-height: 100px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.back-stage .side li > a{
+    display: block;
+    margin: 0 auto;
+    width: 206px;
+    height: 62px;
+    background-color: #d2d2d2;
+    line-height: 62px;
+    font-size: 32px;
+    color: #2b292b;
+    cursor: pointer;
+}
+
+.back-stage .side li.active > a,
+.back-stage .side li:hover > a{
+    color: #fff;
+    background-color: #000;
+}
+.back-stage .back-main{
+    float: right;
+    width: 800px;
+    background-color: #d2d2d2;
+    padding:20px 74px;
+    box-sizing: border-box;
+}
+
+.back-stage .back-main p{
+    font-size: 28px;
+    color: #2b292b;
+}
+
+.back-stage .back-main input{
+    width: 390px;
+    height: 48px;
+    font-size: 28px;
+}
+.back-stage .back-main textarea{
+    width: 390px;
+    height: 248px;
+}
+.back-stage .back-main button{
+    display: block;
+    margin-top: 50px;
+    width: 200px;
+    height: 52px;
+    font-size: 28px;
+}
+#idea,#explore{
+    display: none;
+}
